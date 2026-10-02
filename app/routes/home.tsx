@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { BreachTerminal } from "../components/BreachTerminal";
 import { ContinueTile } from "../components/ContinueTile";
 import { Marquee } from "../components/Marquee";
 import { PathGraphic } from "../components/PathGraphic";
@@ -13,7 +14,7 @@ export function loader() {
 
 export function meta() {
   return [
-    { title: "RoadMap" },
+    { title: "Glitch" },
     {
       name: "description",
       content: "Hands-on guides: short stops, one idea each, a project at the end.",
@@ -36,18 +37,28 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <section className="hero">
         <div className="hero-inner">
           <p className="strap">Hands-on guides</p>
-          <h1 className="hero-title">Learn by building.</h1>
-          <p className="hero-lead">Short stops. One idea each. A project at the end.</p>
-          {first && (
-            <div className="actions">
-              <Link className="pill" to={`/${first.slug}`}>
-                Start route {first.number}
-              </Link>
-              <a className="pill pill-ghost" href="#routes">
-                See all routes
-              </a>
+          <div className="hero-grid">
+            <div className="hero-copy">
+              <h1 className="hero-title">
+                System{" "}
+                <span className="breach" data-text="breached.">
+                  breached.
+                </span>
+              </h1>
+              <p className="hero-lead">Short stops. One idea each. A project at the end.</p>
+              {first && (
+                <div className="actions">
+                  <Link className="pill" to={`/${first.slug}`}>
+                    Start route {first.number}
+                  </Link>
+                  <a className="pill pill-ghost" href="#routes">
+                    See all routes
+                  </a>
+                </div>
+              )}
             </div>
-          )}
+            {first && <BreachTerminal routes={routes} />}
+          </div>
         </div>
       </section>
 
@@ -74,7 +85,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       </section>
 
       {routes.length > 0 && (
-        <section className="tile tile-orange tile-left" id="start">
+        <section className="tile tile-brand tile-left" id="start">
           <div className="container">
             <h2 className="section-title">Where to start</h2>
             <ul className="start-list" aria-label="Reading order">

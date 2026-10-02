@@ -1,4 +1,4 @@
-# RoadMap
+# Glitch
 
 Hands-on learning guides. Each guide is a route: short stops, one idea each, and a project at the end.
 

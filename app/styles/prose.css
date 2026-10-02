@@ -37,7 +37,7 @@
 .prose blockquote {
   margin: 0;
   padding-left: var(--s-md);
-  border-left: 4px solid var(--orange);
+  border-left: 4px solid var(--brand-ink);
   font-family: var(--font-slab);
 }
 
@@ -103,7 +103,7 @@
 .code figcaption {
   padding: 12px 20px;
   border-bottom: 1px solid var(--line-on-dark);
-  color: var(--orange);
+  color: var(--brand-ink);
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0;
@@ -195,12 +195,12 @@
 }
 
 .callout-warning {
-  border-left: 8px solid var(--orange);
+  border-left: 8px solid var(--warn);
 }
 
 .callout-warning .callout-label {
-  background: var(--orange);
-  color: var(--on-orange);
+  background: var(--warn);
+  color: var(--on-warn);
 }
 
 /* "Done when": the solution half of the pattern, with a green check badge. */

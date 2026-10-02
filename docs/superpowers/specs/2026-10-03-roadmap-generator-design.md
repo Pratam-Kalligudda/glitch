@@ -1,4 +1,4 @@
-# RoadMap: guide site — design
+# Glitch (formerly RoadMap): guide site — design
 
 Date: 2026-10-03
 Status: awaiting review
@@ -211,6 +211,25 @@ Format: `<path>[:<line>]: <problem>`, one per line.
 | `npm run build` | Validate, then prerender the static site |
 
 ## 5. Visual design
+
+> **Revision, 2026-10-03 (Glitch rebrand).** At the owner's request the site
+> is renamed **Glitch**, after the "glitch in the Matrix". The Knockout
+> structure below stays; these points supersede it where they conflict:
+>
+> - Colour: crystal cyan `#3ee0ff` replaces orange as the brand fill, with
+>   `#00779c` for brand text and lines on light paper. Crystal red `#ff2e43`
+>   replaces blue for actions (buttons) and warnings. Links use the brand
+>   colour. Green still marks done and "Done when" only.
+> - Big headlines (home hero, route hero, footer wordmark) carry a cyan and
+>   red split edge, sized in em. This is the one exception to "no shadows".
+> - Home hero: headline "System breached." with the second word torn (a
+>   slipped band that flickers once on load), beside a terminal card that
+>   "injects" the real routes as skills: at most three by name, the rest
+>   counted, then a `[breach] complete` summary and `start <first route>`.
+>   The card is decorative and hidden from screen readers. A faint crystal
+>   grid (SVG) sits behind the hero.
+> - Storage keys keep their `roadmap:` prefix so saved progress and theme
+>   choices survive the rename.
 
 > **Revision, 2026-10-03 (design checkpoint).** The owner reviewed the
 > Apple-inspired build and asked to switch to the Knockout style captured in

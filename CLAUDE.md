@@ -1,6 +1,6 @@
-# RoadMap
+# Glitch
 
-A site of hands-on learning guides. Content is Markdown under `routes/`; a React Router app prerenders it to static HTML; GitHub Actions deploys it to GitHub Pages.
+A site of hands-on learning guides (formerly RoadMap; the repository and storage keys keep the old name). Content is Markdown under `routes/`; a React Router app prerenders it to static HTML; GitHub Actions deploys it to GitHub Pages.
 
 ## Commands
 
@@ -57,14 +57,16 @@ To write a new route, use the `new-route` skill.
 
 ## Design rules
 
-The look follows the Knockout system in `design-md/knockout/DESIGN.md` (local reference, not committed; spec section 5 restates it). Keep to it when changing UI:
+The look is the Knockout structure in `design-md/knockout/DESIGN.md` (local reference, not committed) recoloured as Glitch; spec section 5 restates both. Keep to it when changing UI:
 
 - Type: Anton in uppercase for display, Roboto Slab for leads and labels, Roboto 400 body at 18px, IBM Plex Mono for code.
-- Colour: black, paper and orange carry the brand. Blue is reserved for actions. Green only marks done and "Done when".
-- Large fills carry the paper-grain texture tokens (`--grain-light`, `--grain-dark`).
+- Colour: black, paper and crystal cyan carry the brand. Crystal red is reserved for actions (buttons) and warnings. Links use the brand colour. Green only marks done and "Done when".
+- Brand tokens: `--brand` is the crystal fill, with `--on-brand` for text on it. `--brand-ink` is for brand-coloured text and lines; it is a deeper cyan on paper and the bright crystal on black surfaces (listed at the end of `tokens.css`). Never put bright cyan text on paper: it is unreadable.
+- Large fills carry the paper-grain texture tokens (`--grain-light`, `--grain-dark`); the home hero adds the `--grid` texture.
 - Buttons are near-square (2px radius) with a trailing arrow and shrink to 0.95 when pressed. Cards and code blocks have a 1.6px black border and 8px radius.
-- No shadows, no gradients.
-- Use the tokens in `app/styles/tokens.css`; do not hard-code colours in components. Use `--surface` for card backgrounds and `--on-orange` for text on orange so the dark theme works.
+- No gradients. No shadows, except the `--split` glitch edge on the big headlines (`.hero-title`, the footer wordmark).
+- Use the tokens in `app/styles/tokens.css`; do not hard-code colours in components. Use `--surface` for card backgrounds so the dark theme works.
+- The home terminal (`BreachTerminal`) is built from the routes: at most `MAX_SKILLS` by name, the rest counted. It is decorative and `aria-hidden`.
 - Dark mode is `:root[data-theme="dark"]` in `tokens.css`. The nav switch (System / Light / Dark) saves to `localStorage` and `app/theme.ts` inlines a `<head>` script that sets `data-theme` before paint. Style new UI with tokens and it works in both themes.
 - Motion respects `prefers-reduced-motion`; touch targets are at least 44px.
 

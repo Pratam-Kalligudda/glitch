@@ -31,9 +31,9 @@ export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "RoadMap" }];
+  if (!loaderData) return [{ title: "Glitch" }];
   return [
-    { title: `${loaderData.route.title} · RoadMap` },
+    { title: `${loaderData.route.title} · Glitch` },
     { name: "description", content: loaderData.route.summary },
   ];
 }

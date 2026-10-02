@@ -52,7 +52,7 @@ h4 {
 }
 
 a {
-  color: var(--action);
+  color: var(--brand-ink);
   text-decoration: none;
 }
 
@@ -66,7 +66,7 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid var(--action);
+  outline: 3px solid var(--brand-ink);
   outline-offset: 2px;
 }
 
@@ -88,7 +88,7 @@ button {
 }
 
 .eyebrow-accent {
-  color: var(--orange);
+  color: var(--brand-ink);
 }
 
 .fine {
@@ -160,20 +160,21 @@ button {
   text-decoration: underline;
 }
 
-.tile-orange {
-  background-color: var(--orange);
+.tile-brand {
+  background-color: var(--brand);
   background-image: var(--grain-light);
-  color: var(--on-orange);
+  color: var(--on-brand);
 }
 
-.tile-orange a:not(.pill) {
-  color: var(--on-orange);
+.tile-brand a:not(.pill) {
+  color: var(--on-brand);
   font-weight: 700;
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
 
+/* The big headlines carry the glitch: a cyan and red split, like a mis-registered print. */
 .hero-title {
   max-width: 12ch;
   margin-inline: auto;
@@ -183,6 +184,7 @@ button {
   letter-spacing: 0.015em;
   text-transform: uppercase;
   text-wrap: balance;
+  text-shadow: var(--split);
 }
 
 .tile-title {

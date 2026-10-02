@@ -1,5 +1,5 @@
-/* Knockout-inspired tokens: black, paper and orange carry the brand;
-   one blue is reserved for actions. See design-md/knockout/DESIGN.md. */
+/* Glitch tokens on the Knockout structure: black, paper and crystal cyan carry the brand;
+   crystal red is reserved for actions. See design-md/knockout/DESIGN.md for the base system. */
 :root {
   color-scheme: light;
 
@@ -15,16 +15,29 @@
   --black: #0b0b0b;
   --on-dark: #ffffff;
   --on-dark-muted: #c9c9c9;
+  --on-dark-dim: #8a8a8a;
   --line-on-dark: #555555;
 
-  --orange: #f25f24;
-  --on-orange: #000000;
-  --action: #1169fe;
-  --action-press: #0b55d6;
-  --on-action: #ffffff;
+  /* --brand is the crystal fill; --brand-ink is the same hue dark enough for text and
+     lines on paper. Dark surfaces set --brand-ink back to the bright crystal. */
+  --brand: #3ee0ff;
+  --on-brand: #001018;
+  --brand-ink: #00779c;
+  --action: #ff2e43;
+  --action-press: #e01f33;
+  --on-action: #000000;
+  --warn: #ff2e43;
+  --on-warn: #000000;
   --success: #46b887;
-  --mint: #4fe9a4;
   --blush: #ffdede;
+
+  /* The glitch split on big headlines: a cyan edge left, a red edge right. Sized in em so
+     it stays a fine edge at every headline size. */
+  --split: -0.017em 0 0 #3ee0ff, 0.017em 0 0 #ff2e43;
+  --split-wide: -0.033em 0 0 #3ee0ff, 0.033em 0 0 #ff2e43;
+
+  /* Faint crystal grid behind the home hero, drawn as SVG like the grain. */
+  --grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M0 .5H48M.5 0V48' fill='none' stroke='%2300779c' stroke-opacity='.2'/%3E%3C/svg%3E");
 
   --line: 1.6px solid var(--ink);
 
@@ -63,7 +76,7 @@
 }
 
 /* Dark theme: the page becomes black paper, cards one step lighter.
-   Brand fills (orange, blue, green) and code blocks keep their colours.
+   Brand fills (cyan, red, green) and code blocks keep their colours.
    The head script in app/theme.ts sets data-theme from the saved choice or the system. */
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -77,12 +90,23 @@
   --paper: #161616;
   --surface: #1f1f1f;
 
-  --action: #3d86ff;
-  --action-press: #1169fe;
+  --brand-ink: var(--brand);
 
   --grain-light: var(--grain-dark);
+  --grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M0 .5H48M.5 0V48' fill='none' stroke='%233ee0ff' stroke-opacity='.14'/%3E%3C/svg%3E");
 }
 
 :root[data-theme="dark"] .global-nav {
   border-bottom: 1px solid var(--line-on-dark);
+}
+
+/* Black surfaces in either theme: text and lines use the bright crystal. */
+.tile-dark,
+.marquee-dark,
+.route-card-top,
+.part-head:not(.part-head-capstone),
+.route-stats,
+.code,
+.global-nav {
+  --brand-ink: var(--brand);
 }

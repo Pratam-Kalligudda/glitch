@@ -1,6 +1,6 @@
-/** Code colours for the Knockout-style black code card: orange and mint on paper white. */
+/** Code colours for the black code card: crystal cyan and mint on paper white. */
 export const codeTheme = {
-  name: "roadmap-knockout",
+  name: "glitch",
   type: "dark" as const,
   colors: {
     "editor.background": "#0b0b0b",
@@ -13,7 +13,7 @@ export const codeTheme = {
     },
     {
       scope: ["keyword", "storage", "storage.type", "keyword.control", "constant.language"],
-      settings: { foreground: "#ff7a45" },
+      settings: { foreground: "#3ee0ff" },
     },
     {
       scope: ["string", "string.quoted", "constant.numeric"],

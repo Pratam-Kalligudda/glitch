@@ -1,6 +1,6 @@
 ---
 name: new-route
-description: Write a new learning route (guide) for the RoadMap site. Use when asked to add, create or write a route, guide or course on a topic.
+description: Write a new learning route (guide) for the Glitch site. Use when asked to add, create or write a route, guide or course on a topic.
 ---
 
 # New route

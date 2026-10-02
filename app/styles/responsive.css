@@ -1,6 +1,10 @@
 /* Breakpoints (max-width): 1068px, 833px, 640px, 419px.
    Type already scales with clamp(); these rules change layout. */
 @media (max-width: 1068px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .route-hero-grid {
     grid-template-columns: minmax(0, 1fr);
     row-gap: var(--s-xl);
@@ -119,6 +123,11 @@
   .code pre {
     padding: 16px;
     font-size: 13.5px;
+  }
+
+  .term-body {
+    padding: 16px;
+    font-size: 13px;
   }
 
   .subnav-title {

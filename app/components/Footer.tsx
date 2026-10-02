@@ -5,7 +5,7 @@ export function Footer() {
       <div className="container footer-inner">
         <p className="footer-made">Made for learning by doing</p>
         <p className="footer-mark" aria-hidden="true">
-          RoadMap
+          Glitch
         </p>
         <div className="footer-meta">
           <p className="fine">Progress is saved in this browser only.</p>
