@@ -1,0 +1,160 @@
+/* Global nav */
+.global-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: var(--nav-h);
+  background: var(--black);
+}
+
+.global-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 100%;
+  width: min(100% - 48px, 1440px);
+  margin-inline: auto;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+}
+
+.global-nav a {
+  color: var(--on-dark);
+  opacity: 0.8;
+  padding-block: 14px;
+}
+
+.global-nav a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.global-nav .global-nav-brand {
+  opacity: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Route cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.route-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-xs);
+  padding: var(--s-lg);
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+}
+
+.route-card-title {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.19;
+  letter-spacing: 0.011em;
+}
+
+.route-card-summary {
+  flex: 1;
+  color: var(--ink-muted);
+  margin-bottom: var(--s-sm);
+}
+
+.route-card .path {
+  margin: 0 0 var(--s-sm);
+}
+
+/* Progress bar */
+.progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--hairline);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+/* Route-path graphic */
+.path {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: var(--s-xl) auto 0;
+}
+
+.path-line {
+  stroke: var(--ink-faint);
+  stroke-width: 2;
+}
+
+.path-dot {
+  fill: var(--canvas);
+  stroke: var(--ink-faint);
+  stroke-width: 2;
+}
+
+.path-line-done {
+  stroke: var(--accent);
+}
+
+.path-dot-done {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.route-card .path-dot {
+  fill: var(--card);
+}
+
+.route-card .path-dot-done {
+  fill: var(--accent);
+}
+
+.tile-dark .path-dot {
+  fill: var(--tile-dark);
+}
+
+.tile-dark .path-line-done {
+  stroke: var(--accent-on-dark);
+}
+
+.tile-dark .path-dot-done {
+  fill: var(--accent-on-dark);
+  stroke: var(--accent-on-dark);
+}
+
+/* Where to start, empty state */
+.start-list {
+  display: grid;
+  gap: var(--s-sm);
+  padding: 0;
+  list-style: none;
+  font-size: 21px;
+  line-height: 1.38;
+  text-align: left;
+}
+
+.empty {
+  padding: var(--s-xxl) 0;
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+/* Footer */
+.footer {
+  padding: 64px 0;
+  background: var(--parchment);
+}
+
+.footer .fine + .fine {
+  margin-top: var(--s-xs);
+}

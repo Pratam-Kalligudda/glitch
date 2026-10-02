@@ -1,0 +1,221 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + var(--subnav-h) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-focus);
+  outline-offset: 2px;
+}
+
+.container {
+  width: min(100% - 48px, 1440px);
+  margin-inline: auto;
+}
+
+.container-narrow {
+  width: min(100% - 48px, 980px);
+}
+
+.eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+  color: var(--ink-faint);
+}
+
+.fine {
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  color: var(--ink-faint);
+}
+
+/* Tiles: full-bleed sections. The colour change is the divider. */
+.tile {
+  padding: var(--s-section) 24px;
+  text-align: center;
+}
+
+.tile-light {
+  background: var(--canvas);
+}
+
+.tile-parchment {
+  background: var(--parchment);
+  text-align: left;
+}
+
+.tile-dark {
+  background: var(--tile-dark);
+  color: var(--on-dark);
+}
+
+.tile-dark .tile-lead {
+  color: var(--on-dark-muted);
+}
+
+.tile-dark .eyebrow-accent {
+  color: var(--accent-on-dark);
+}
+
+.hero-title {
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -0.005em;
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.tile-title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.section-title {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.011em;
+  margin-bottom: var(--s-xl);
+}
+
+.tile-lead {
+  font-size: 28px;
+  line-height: 1.14;
+  letter-spacing: 0.007em;
+  margin-top: var(--s-sm);
+  max-width: 32ch;
+  margin-inline: auto;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-md);
+  margin-top: var(--s-xl);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  font-size: 17px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.pill:hover {
+  text-decoration: none;
+}
+
+.pill:active {
+  transform: scale(0.95);
+}
+
+.pill-ghost {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tile-dark .pill-ghost {
+  border-color: var(--accent-on-dark);
+  color: var(--accent-on-dark);
+}
+
+.pill-small {
+  min-height: 32px;
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+.text-link {
+  font-size: 17px;
+}
+
+/* Scroll reveal: pure CSS, so content stays visible without JavaScript
+   and in browsers without scroll-driven animations. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

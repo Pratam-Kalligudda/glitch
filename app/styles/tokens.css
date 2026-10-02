@@ -1,0 +1,51 @@
+:root {
+  color-scheme: light;
+
+  --accent: #0066cc;
+  --accent-fill: #0066cc;
+  --accent-focus: #0071e3;
+  --accent-on-dark: #2997ff;
+  --on-accent: #ffffff;
+
+  --ink: #1d1d1f;
+  --ink-muted: #333333;
+  --ink-faint: #7a7a7a;
+
+  --canvas: #ffffff;
+  --parchment: #f5f5f7;
+  --card: #ffffff;
+  --tile-dark: #272729;
+  --black: #000000;
+  --on-dark: #ffffff;
+  --on-dark-muted: #cccccc;
+
+  --hairline: #e0e0e0;
+  --divider: #f0f0f0;
+  --nav-frost: rgba(245, 245, 247, 0.8);
+  --nav-line: rgba(0, 0, 0, 0.08);
+
+  --code-bg: #1d1d1f;
+  --code-ink: #f5f5f7;
+  --code-faint: #a1a1a6;
+  --warning: #b25000;
+
+  --r-sm: 8px;
+  --r-lg: 18px;
+  --r-pill: 9999px;
+
+  --s-xxs: 4px;
+  --s-xs: 8px;
+  --s-sm: 12px;
+  --s-md: 17px;
+  --s-lg: 24px;
+  --s-xl: 32px;
+  --s-xxl: 48px;
+  --s-section: 80px;
+
+  --nav-h: 44px;
+  --subnav-h: 52px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Inter Variable", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
