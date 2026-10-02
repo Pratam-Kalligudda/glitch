@@ -28,20 +28,16 @@ Pick one topic and go deep, rather than several topics thinly.
 | "Databases" | "PostgreSQL for application developers" |
 | "Git" (init, commit, push) | "Git for working on a team": history, branching, rebasing, recovery, review |
 
-A topic is the right size when it needs roughly **20 to 40 stops** and supports a capstone
-of **5 to 8 steps**. Fewer than 15 stops usually means the route is skimming; more than 45
-usually means it is two routes.
+### No size limit
 
-### Size at a glance
+There is no target or maximum number of parts, stops, words or capstone steps. A route is
+as long as its topic needs: a small tool may take a dozen stops, a large framework a
+hundred. The measure is completeness, not length. A route is finished when a reader who
+starts from the stated baseline can do the stated outcome without another tutorial.
 
-| Item | Typical range |
-|---|---|
-| Parts (not counting the capstone) | 3 to 6 |
-| Stops per part | 3 to 10 |
-| Stops in the route | 20 to 40 |
-| Words per stop | 150 to 400 |
-| Code blocks per stop | 1 to 3 |
-| Capstone steps | 5 to 8, plus the spec stop |
+Length is managed by granularity, not by cutting: one idea per stop, as many stops as
+there are ideas, grouped into as many parts as the topic has stages. The reader learns them
+one by one, in order. Never drop, merge or skim a concept to make a route shorter.
 
 ## 2. Before writing
 
@@ -52,7 +48,8 @@ usually means it is two routes.
    route listed under `prerequisites`.
 3. **Design the capstone first.** Choose one real project that needs most of the topic.
    List its features. Every part of the route then exists to teach something the capstone
-   uses. A concept that the capstone never uses is a candidate for removal.
+   uses. When the topic has an important concept the capstone does not use yet, extend the
+   capstone with a step that uses it rather than leaving the concept out.
 4. **Research against official sources.** Read the current official documentation for
    every tool. Note the versions you will pin. Do not write commands or APIs from memory
    alone; run them where you can.
@@ -61,7 +58,8 @@ usually means it is two routes.
 
 ## 3. The shape of a route
 
-Order parts from foundations to application. A typical route:
+Order parts from foundations to application. The FastAPI route is one example; use as
+many parts as the topic has stages:
 
 | Part | Purpose | Example (FastAPI route) |
 |---|---|---|
@@ -154,17 +152,18 @@ to the parts around it. A capstone part adds `kind: capstone`.
 
 ## 5. Writing a stop
 
-A stop teaches **one idea, completely**. "One idea" keeps stops short; "completely" keeps
-them from being vague. The reader should finish a stop able to use the idea, knowing why
-it works the way it does, and knowing the mistake people usually make with it.
+A stop teaches **one idea, completely**. "One idea" decides where a stop ends and the next
+begins; "completely" means it takes as much explanation and as many examples as that idea
+needs, however long that is. The reader should finish a stop able to use the idea, knowing
+why it works the way it does, and knowing the mistake people usually make with it.
 
 ### 5.1 Anatomy
 
 Use these elements in this order. Not every stop needs every element, but every stop needs
 the first three.
 
-1. **What and why** (required). One or two short paragraphs. Name the idea, say what
-   problem it solves, and define any new term on first use.
+1. **What and why** (required). Name the idea, say what problem it solves, and define any
+   new term on first use.
 2. **A working example** (required). Complete and runnable: imports included, nothing
    elided with `...` that the reader would need to type. Use `title="path/to/file"` when
    the code is a file. Show the command to run it and its output when the output teaches
@@ -276,7 +275,7 @@ route on something real.
 ### 6.1 Choosing the project
 
 - It must need most of the route. List each part and the capstone feature that uses it.
-- It must be small enough to finish: one service, one tool, one site.
+- It must be one project, grown step by step, so the reader always has something running.
 - It must be real: something the reader could keep using or show to someone.
 
 ### 6.2 The spec stop
@@ -310,7 +309,8 @@ Stack: Python 3.13, FastAPI 0.115, SQLAlchemy 2.0, PostgreSQL 17, Redis 7.
 
 ### 6.3 Steps
 
-A typical progression, adapted to the topic:
+One common progression, adapted to the topic. Add as many steps as the project needs; a
+large topic may need several steps for each stage:
 
 1. **Minimal working version.** Everything in one file, in-memory.
 2. **Validation and errors.** Reject bad input; return useful errors.
@@ -324,8 +324,8 @@ A typical progression, adapted to the topic:
 Each step file contains, in order:
 
 1. One sentence on what this step adds.
-2. "Do this yourself first, then compare." followed by a numbered task list of 3 to 6
-   items, each pointing to the stop that taught it with `[[stop-id]]`.
+2. "Do this yourself first, then compare." followed by a numbered task list, each item
+   pointing to the stop that taught it with `[[stop-id]]`.
 3. The code **as it stands at the end of the step**: complete files with `title=`, so the
    reader can compare or catch up.
 4. How to run and check it: commands and the expected output.
@@ -427,7 +427,7 @@ The coverage list shows that every part is used by the capstone.
 
 Before calling a route done:
 
-- [ ] One topic, 20 to 40 stops, 5 to 8 capstone steps.
+- [ ] One topic, covered completely: every concept the outcome needs has a stop.
 - [ ] Every stop has what-and-why, a complete runnable example, and how it works.
 - [ ] Common mistakes are in `[!WARNING]` callouts with symptom and fix.
 - [ ] Every command and API checked against official docs; versions pinned; `checked`

@@ -25,7 +25,7 @@ Node 24.15 or newer is required.
 
 ## Content rules
 
-**Before creating or editing anything under `routes/`, read `docs/writing-a-route.md` in full and follow it.** It sets the depth a route must reach (one topic, 20 to 40 stops, a 5 to 8 step capstone), the structure of parts, stops and capstone steps, and the checklist a route must pass. The rules below are the short form the validator enforces.
+**Before creating or editing anything under `routes/`, read `docs/writing-a-route.md` in full and follow it.** It sets the depth a route must reach (one topic covered completely, with no limit on stops, parts or capstone steps), the structure of parts, stops and capstone steps, and the checklist a route must pass. The rules below are the short form the validator enforces.
 
 ```
 routes/<route-slug>/

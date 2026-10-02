@@ -17,8 +17,8 @@ Ask the owner, one question at a time:
 2. What does the reader already know?
 3. What should the capstone project be? Offer a suggestion that needs most of the topic.
 
-If the topic is too broad for one route or too thin for 20 stops, say so and propose a
-better-sized topic (guide, section 1).
+There is no size limit (guide, section 1): plan as many stops, parts and capstone steps
+as the topic needs to be complete.
 
 ## 2. Research
 
@@ -29,7 +29,7 @@ versions to pin. Run commands where you can. Do not write from memory alone.
 
 Propose the outline in the format of guide section 8 and wait for the owner's approval
 before writing any stop. It must include the capstone coverage list showing that every
-part is used by the capstone. Aim for 20 to 40 stops and 5 to 8 capstone steps.
+part is used by the capstone.
 
 ## 4. Write
 
