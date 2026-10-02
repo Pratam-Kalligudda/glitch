@@ -1,4 +1,12 @@
+import { useEffect, useMemo } from "react";
+import { PartHeader } from "../components/PartHeader";
+import { PathGraphic } from "../components/PathGraphic";
+import { Rail } from "../components/Rail";
+import { Stop } from "../components/Stop";
+import { SubNav } from "../components/SubNav";
 import { getRouteView } from "../content.server";
+import { useActivePart } from "../hooks/useActivePart";
+import { nextStop, useProgress, whenHydrated } from "../state/progress";
 import type { Route } from "./+types/route";
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -7,10 +15,81 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
+export function meta({ loaderData }: Route.MetaArgs) {
+  if (!loaderData) return [{ title: "RoadMap" }];
+  return [
+    { title: `${loaderData.route.title} · RoadMap` },
+    { name: "description", content: loaderData.route.summary },
+  ];
+}
+
+/** One delegated handler for every "Copy" button in the rendered Markdown. */
+function copyCode(event: React.MouseEvent<HTMLElement>) {
+  const button = (event.target as HTMLElement).closest<HTMLButtonElement>("button.copy");
+  const code = button?.parentElement?.querySelector("pre")?.textContent;
+  if (!button || code == null || !navigator.clipboard) return;
+  void navigator.clipboard.writeText(code).then(() => {
+    button.textContent = "Copied";
+    window.setTimeout(() => {
+      button.textContent = "Copy";
+    }, 1500);
+  });
+}
+
 export default function RoutePage({ loaderData }: Route.ComponentProps) {
+  const { route } = loaderData;
+  const done = useProgress((s) => s.done[route.slug]);
+  const toggle = useProgress((s) => s.toggle);
+  const visit = useProgress((s) => s.visit);
+
+  const stops = useMemo(() => route.parts.flatMap((p) => p.stops), [route]);
+  const doneIds = useMemo(() => {
+    const valid = new Set(stops.map((s) => s.id));
+    return new Set((done ?? []).filter((id) => valid.has(id)));
+  }, [done, stops]);
+  const next = nextStop([...doneIds], stops);
+  const active = useActivePart(route.parts.map((p) => p.id));
+
+  // Wait for saved progress before writing, or the empty state would overwrite it.
+  useEffect(() => whenHydrated(() => visit(route.slug)), [route.slug, visit]);
+
   return (
-    <section className="tile tile-light">
-      <h1 className="hero-title">{loaderData.route.title}</h1>
-    </section>
+    <>
+      <SubNav title={route.title} done={doneIds.size} total={stops.length} nextId={next?.id ?? null} />
+
+      <section className="tile tile-light route-hero">
+        <p className="eyebrow">Route {route.number}</p>
+        <h1 className="hero-title">{route.hero || route.title}</h1>
+        {route.lede && <p className="tile-lead">{route.lede}</p>}
+        <PathGraphic total={stops.length} done={doneIds.size} />
+      </section>
+
+      <div className="route-body" onClick={copyCode}>
+        <aside className="route-rail">
+          <Rail parts={route.parts} doneIds={doneIds} active={active} />
+        </aside>
+        <div className="route-content">
+          {route.parts.map((part) => (
+            <section key={part.id} id={`part-${part.id}`} className="part">
+              <PartHeader part={part} />
+              {part.stops.map((stop) => (
+                <Stop
+                  key={stop.id}
+                  stop={stop}
+                  done={doneIds.has(stop.id)}
+                  onToggle={(id) => toggle(route.slug, id)}
+                />
+              ))}
+            </section>
+          ))}
+          {route.checked && (
+            <p className="fine route-checked">
+              Library APIs and commands were checked against official documentation in {route.checked}.
+              They change; pin versions in your own projects.
+            </p>
+          )}
+        </div>
+      </div>
+    </>
   );
 }

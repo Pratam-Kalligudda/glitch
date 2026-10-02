@@ -5,6 +5,7 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/components.css";
+import "./styles/prose.css";
 import { Footer } from "./components/Footer";
 import { GlobalNav } from "./components/GlobalNav";
 import { useProgress } from "./state/progress";

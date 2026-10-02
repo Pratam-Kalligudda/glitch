@@ -1,0 +1,163 @@
+/* Rendered Markdown. Class names come from content/render.ts. */
+.prose > * + * {
+  margin-top: var(--s-md);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+}
+
+.prose li + li {
+  margin-top: 6px;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose blockquote {
+  margin: 0;
+  padding-left: var(--s-md);
+  border-left: 2px solid var(--hairline);
+  color: var(--ink-muted);
+}
+
+.prose :not(pre) > code,
+.callout :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  letter-spacing: 0;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--parchment);
+}
+
+.callout :not(pre) > code {
+  background: var(--card);
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.prose th,
+.prose td {
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid var(--hairline);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  font-weight: 600;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--r-sm);
+}
+
+/* Code blocks: dark in both themes. */
+.code {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--code-bg);
+  color: var(--code-ink);
+}
+
+.code figcaption {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0;
+  color: var(--code-faint);
+}
+
+.code pre {
+  margin: 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  background: transparent !important;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.code code {
+  font-family: inherit;
+}
+
+.copy {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--code-ink);
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.code:hover .copy,
+.copy:focus-visible {
+  opacity: 1;
+}
+
+.copy:active {
+  transform: scale(0.95);
+}
+
+@media (hover: none) {
+  .copy {
+    opacity: 1;
+  }
+}
+
+/* Callouts */
+.callout {
+  padding: var(--s-md) var(--s-lg);
+  border-radius: var(--r-lg);
+  background: var(--parchment);
+  font-size: 15px;
+}
+
+.callout > * + * {
+  margin-top: var(--s-xs);
+}
+
+.callout-label {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.callout-warning .callout-label {
+  color: var(--warning);
+}
+
+.callout-done {
+  margin-top: var(--s-md);
+}
+
+.callout-done .callout-label {
+  color: var(--accent);
+}
+
+.callout-done .callout-body,
+.callout-done .callout-body p {
+  display: inline;
+}
