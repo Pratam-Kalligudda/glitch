@@ -15,11 +15,22 @@ export function flattenBuild(clientDir: string, basePath: string): void {
   // With a base path the SPA shell is written as the root index.html; keep it for 404s.
   const shell = path.join(clientDir, "index.html");
   const fallback = path.join(clientDir, "__spa-fallback.html");
+  const entries = fs.readdirSync(nested);
+  // A page named like existing build output (assets/, route-assets/, or the base folder
+  // itself) would overwrite it; fail the build before moving anything.
+  const clashes = entries.filter(
+    (entry) => entry !== "index.html" && fs.existsSync(path.join(clientDir, entry)),
+  );
+  if (clashes.length > 0) {
+    throw new Error(
+      `Cannot flatten ${basePath}: ${clashes.join(", ")} already exist in ${clientDir}. ` +
+        "Rename the route folder so it does not match a build output name or the base path.",
+    );
+  }
   if (fs.existsSync(shell) && !fs.existsSync(fallback)) fs.renameSync(shell, fallback);
-  for (const entry of fs.readdirSync(nested)) {
-    const target = path.join(clientDir, entry);
-    fs.rmSync(target, { recursive: true, force: true });
-    fs.renameSync(path.join(nested, entry), target);
+  for (const entry of entries) {
+    fs.rmSync(path.join(clientDir, entry), { recursive: true, force: true });
+    fs.renameSync(path.join(nested, entry), path.join(clientDir, entry));
   }
   fs.rmSync(path.join(clientDir, segments[0]), { recursive: true, force: true });
 }

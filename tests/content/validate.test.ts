@@ -18,6 +18,19 @@ describe("validateSite", () => {
     expect(messages(a, b)).toContain("routes/b/route.yaml: number 1 also used by 'a'");
   });
 
+  it("requires lowercase slugs and rejects names the build output uses", () => {
+    const part = () => [makePart("p", [makeStop("s")])];
+    expect(messages(makeRoute("Git Basics", part(), { dir: "routes/Git Basics" }))).toContain(
+      "routes/Git Basics: route folder name must use lowercase letters, digits and single hyphens",
+    );
+    for (const slug of ["assets", "route-assets"]) {
+      expect(messages(makeRoute(slug, part()))).toContain(
+        `routes/${slug}: route folder name '${slug}' is reserved for build output`,
+      );
+    }
+    expect(messages(makeRoute("git-basics", part()))).toEqual([]);
+  });
+
   it("rejects unknown prerequisites", () => {
     const a = makeRoute("a", [makePart("p", [makeStop("s")])], { prerequisites: ["z"] });
     expect(messages(a)).toContain("routes/a/route.yaml: unknown prerequisite 'z'");
@@ -114,6 +127,15 @@ describe("validateSite", () => {
       { assets: ["flow.svg"] },
     );
     expect(messages(route)).toEqual(["routes/x/01-a/01-b.md:6: missing asset 'gone.png'"]);
+  });
+
+  it("reports unsafe link and image URLs at the file line", () => {
+    const body = "One.\n\n[a](javascript:alert(1)) and ![b](data:image/png;base64,AA)\n";
+    const route = makeRoute("x", [makePart("a", [makeStop("b", { body, bodyOffset: 3 })])]);
+    expect(messages(route)).toEqual([
+      "routes/x/01-a/01-b.md:6: unsafe URL 'javascript:alert(1)'",
+      "routes/x/01-a/01-b.md:6: unsafe URL 'data:image/png;base64,AA'",
+    ]);
   });
 
   it("checks part intros too", () => {

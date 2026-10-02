@@ -33,7 +33,7 @@ routes/<route-slug>/
     01-<stop-id>.md
 ```
 
-- The folder name is the route slug. Numeric prefixes set order and are not part of an id.
+- The folder name is the route slug: lowercase letters, digits and single hyphens. `assets` and `route-assets` are reserved, and a slug must not equal the repository name (the base path folder). Numeric prefixes set order and are not part of an id.
 - A stop id is the filename without prefix and extension. It is the page anchor and the progress key, so renaming a stop file loses readers' saved progress for it. Ids are unique within a route.
 - `route.yaml`: `title`, `number` (unique), `summary` are required. Optional: `hero`, `lede`, `prerequisites` (route slugs, each with a lower `number`), `checked` (`YYYY-MM`), `draft` (`true` hides the route). Quote any value that contains `: `.
 - `part.md` front matter: `title`, `goal`, and `kind: capstone` for a capstone. The body is an optional intro.
@@ -43,7 +43,7 @@ routes/<route-slug>/
 - Callouts: `> [!NOTE]` and `> [!WARNING]`.
 - References: `[[stop-id]]` in the same route, `[[route-slug/stop-id]]` in another. The link text is the target's title.
 - Images live in the route's `assets/` folder and are referenced by filename: `![Alt](flow.svg)`.
-- Raw HTML in Markdown is shown as text, never rendered.
+- Raw HTML in Markdown is shown as text, never rendered. Links and images may use `http:`, `https:`, `mailto:`, relative paths or `#` anchors; any other scheme (`javascript:`, `data:`) fails validation and is stripped from the page.
 
 Adding a route is only a new folder: the landing page, prerendering, links and the reading order pick it up. `tests/content/routes.test.ts` fails if any route under `routes/` stops validating or rendering.
 

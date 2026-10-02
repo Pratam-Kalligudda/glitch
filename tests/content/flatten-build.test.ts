@@ -45,6 +45,22 @@ describe("flattenBuild", () => {
     expect(fs.existsSync(path.join(dir, "a"))).toBe(false);
   });
 
+  it("refuses to overwrite build output with a same-named page and deletes nothing", () => {
+    const dir = tree({
+      "assets/app.js": "js",
+      "sub/index.html": "home",
+      "sub/assets/index.html": "route",
+    });
+    expect(() => flattenBuild(dir, "/sub/")).toThrow(/assets/);
+    expect(read(dir, "assets/app.js")).toBe("js");
+  });
+
+  it("refuses a route whose slug equals the base path folder", () => {
+    const dir = tree({ "guides/index.html": "home", "guides/guides/index.html": "route" });
+    expect(() => flattenBuild(dir, "/guides/")).toThrow(/guides/);
+    expect(read(dir, "guides/guides/index.html")).toBe("route");
+  });
+
   it("does nothing for the root base path or when nothing was nested", () => {
     const dir = tree({ "index.html": "home" });
     flattenBuild(dir, "/");

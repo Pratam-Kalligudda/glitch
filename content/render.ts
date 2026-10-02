@@ -1,3 +1,4 @@
+import type { Element, Root as HastRoot } from "hast";
 import type { Blockquote, Code, Html, Image, Paragraph, PhrasingContent, Root, Text } from "mdast";
 import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
@@ -6,7 +7,7 @@ import remarkRehype from "remark-rehype";
 import { codeToHtml } from "shiki";
 import { unified } from "unified";
 import { SKIP, visit } from "unist-util-visit";
-import { REF, isLocalUrl } from "./markdown";
+import { REF, isLocalUrl, isSafeUrl } from "./markdown";
 import { codeTheme } from "./theme";
 
 export interface RenderContext {
@@ -92,6 +93,18 @@ function remarkImages(ctx: RenderContext) {
   };
 }
 
+/** Strips `javascript:`, `data:` and other non-web URLs from links and images, however they were written. */
+function rehypeSafeUrls() {
+  return (tree: HastRoot) => {
+    visit(tree, "element", (node: Element) => {
+      for (const prop of ["href", "src"]) {
+        const value = node.properties[prop];
+        if (typeof value === "string" && !isSafeUrl(value)) delete node.properties[prop];
+      }
+    });
+  };
+}
+
 async function highlight(code: string, lang: string): Promise<string> {
   try {
     return await codeToHtml(code, { lang, theme: codeTheme });
@@ -132,6 +145,7 @@ export async function renderMarkdown(md: string, ctx: RenderContext): Promise<st
     .use(remarkImages, ctx)
     .use(remarkCode)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeSafeUrls)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(md);
   return String(file);

@@ -81,6 +81,27 @@ describe("renderMarkdown", () => {
     expect(await render("Write `[[first-stop]]`.")).toContain("<code>[[first-stop]]</code>");
   });
 
+  it.each([
+    ["inline link", "[a](javascript:alert(1))"],
+    ["reference definition", '[a][r]\n\n[r]: javascript:alert(1) "t"'],
+    ["autolink", "<javascript:alert(1)>"],
+    ["mixed case with spaces", "[a](  JaVaScRiPt:alert(1))"],
+    ["data URL", "[a](data:text/html,<script>alert(1)</script>)"],
+    ["image source", "![x](javascript:alert(1))"],
+  ])("drops a dangerous URL in a %s", async (_name, md) => {
+    const html = await render(md);
+    expect(html).not.toMatch(/(?:href|src)="\s*(?:javascript|data):/i);
+  });
+
+  it("keeps safe link URLs", async () => {
+    const html = await render(
+      "[a](https://x.dev/) [b](mailto:me@x.dev) [c](#init) [d](./notes.md) [e](/abs)",
+    );
+    for (const url of ["https://x.dev/", "mailto:me@x.dev", "#init", "./notes.md", "/abs"]) {
+      expect(html).toContain(`href="${url}"`);
+    }
+  });
+
   it("rewrites local image paths and keeps external ones", async () => {
     const html = await render("![Flow](flow.svg)\n\n![X](https://example.com/x.png)");
     expect(html).toContain('src="/route-assets/sample/flow.svg"');

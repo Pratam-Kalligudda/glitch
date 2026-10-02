@@ -1,6 +1,11 @@
 import { scanMarkdown } from "./markdown";
 import { resolveRef, type Problem, type Route } from "./model";
 
+/** Slugs become URL segments and `[[slug/stop]]` references, so they follow the REF pattern. */
+const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+/** Folders the build writes next to the route pages in build/client/. */
+const RESERVED_SLUGS = new Set(["assets", "route-assets"]);
+
 export function validateSite(routes: Route[]): Problem[] {
   const out: Problem[] = [];
   const slugs = new Set(routes.map((r) => r.slug));
@@ -9,6 +14,15 @@ export function validateSite(routes: Route[]): Problem[] {
   for (const route of routes) {
     const metaFile = `${route.dir}/route.yaml`;
     const within = (p: string) => p.slice(route.dir.length + 1);
+
+    if (!SLUG.test(route.slug)) {
+      out.push({
+        file: route.dir,
+        message: "route folder name must use lowercase letters, digits and single hyphens",
+      });
+    } else if (RESERVED_SLUGS.has(route.slug)) {
+      out.push({ file: route.dir, message: `route folder name '${route.slug}' is reserved for build output` });
+    }
 
     if (route.number > 0) {
       const other = numbers.get(route.number);
@@ -38,6 +52,9 @@ export function validateSite(routes: Route[]): Problem[] {
         if (!resolveRef(routes, route.slug, ref.target)) {
           out.push({ file, line: ref.line + offset, message: `unknown reference '${ref.target}'` });
         }
+      }
+      for (const unsafe of found.unsafeUrls) {
+        out.push({ file, line: unsafe.line + offset, message: `unsafe URL '${unsafe.url}'` });
       }
       for (const image of found.images) {
         if (!route.assets.includes(image.url)) {
