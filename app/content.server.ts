@@ -4,7 +4,7 @@ import { formatProblem, type Route } from "../content/model";
 import { toSummary, toView, type RouteSummary, type RouteView } from "../content/view";
 
 function load(): Route[] {
-  const dir = path.resolve(process.env.ROADMAP_ROUTES_DIR ?? "routes");
+  const dir = path.resolve(process.env.GLITCH_ROUTES_DIR ?? "routes");
   const { routes, problems } = checkContent(dir);
   if (problems.length > 0) {
     throw new Error(`Content problems:\n${problems.map(formatProblem).join("\n")}`);

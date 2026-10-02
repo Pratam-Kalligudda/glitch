@@ -5,10 +5,10 @@ import { copyAssets } from "./content/copy-assets";
 
 /** Live preview while writing content: re-copies route images and reloads the page. */
 function contentReload(): Plugin {
-  const dir = path.resolve(process.env.ROADMAP_ROUTES_DIR ?? "routes");
+  const dir = path.resolve(process.env.GLITCH_ROUTES_DIR ?? "routes");
   const out = path.resolve("public/route-assets");
   return {
-    name: "roadmap-content-reload",
+    name: "glitch-content-reload",
     configureServer(server) {
       server.watcher.add(dir);
       server.watcher.on("all", (_event, file) => {

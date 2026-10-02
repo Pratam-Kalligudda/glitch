@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
 
-export const STORAGE_KEY = "roadmap:progress:v1";
+export const STORAGE_KEY = "glitch:progress:v1";
 
 interface ProgressData {
   /** Done stop ids per route slug. */

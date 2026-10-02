@@ -12,7 +12,7 @@ export const stopMd = (title = "B", body = "Text.\n") =>
 
 /** Writes files under a fresh temp `routes` folder and returns that folder. */
 export function writeTree(files: Record<string, string>): string {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "roadmap-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "glitch-"));
   const routes = path.join(root, "routes");
   fs.mkdirSync(routes);
   for (const [rel, content] of Object.entries(files)) {

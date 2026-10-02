@@ -5,7 +5,7 @@ function run(routesDir: string) {
   return spawnSync("npx tsx content/cli.ts", {
     shell: true,
     encoding: "utf8",
-    env: { ...process.env, ROADMAP_ROUTES_DIR: routesDir },
+    env: { ...process.env, GLITCH_ROUTES_DIR: routesDir },
   });
 }
 

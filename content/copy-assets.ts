@@ -16,5 +16,5 @@ export function copyAssets(routesDir: string, outDir: string): void {
 
 // `npm run assets`: Vite serves `public/` in dev and copies it into the build.
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
-  copyAssets(process.env.ROADMAP_ROUTES_DIR ?? "routes", path.resolve("public/route-assets"));
+  copyAssets(process.env.GLITCH_ROUTES_DIR ?? "routes", path.resolve("public/route-assets"));
 }

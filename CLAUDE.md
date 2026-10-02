@@ -1,6 +1,6 @@
 # Glitch
 
-A site of hands-on learning guides (formerly RoadMap; the repository and storage keys keep the old name). Content is Markdown under `routes/`; a React Router app prerenders it to static HTML; GitHub Actions deploys it to GitHub Pages.
+A site of hands-on learning guides. Content is Markdown under `routes/`; a React Router app prerenders it to static HTML; GitHub Actions deploys it to GitHub Pages.
 
 ## Commands
 

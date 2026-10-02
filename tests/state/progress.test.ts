@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const KEY = "roadmap:progress:v1";
+const KEY = "glitch:progress:v1";
 
 /** A fresh, not-yet-hydrated copy of the store module. */
 async function fresh() {

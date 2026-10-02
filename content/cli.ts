@@ -1,7 +1,7 @@
 import { checkContent } from "./index";
 import { formatProblem } from "./model";
 
-const dir = process.env.ROADMAP_ROUTES_DIR ?? "routes";
+const dir = process.env.GLITCH_ROUTES_DIR ?? "routes";
 const { routes, problems } = checkContent(dir);
 
 if (problems.length > 0) {

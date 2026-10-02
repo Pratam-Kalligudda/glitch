@@ -1,7 +1,7 @@
 export type ThemePref = "system" | "light" | "dark";
 export type Theme = "light" | "dark";
 
-export const THEME_KEY = "roadmap:theme";
+export const THEME_KEY = "glitch:theme";
 export const THEME_ORDER: ThemePref[] = ["system", "light", "dark"];
 const DARK_QUERY = "(prefers-color-scheme: dark)";
 

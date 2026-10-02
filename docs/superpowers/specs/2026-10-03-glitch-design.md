@@ -1,4 +1,4 @@
-# Glitch (formerly RoadMap): guide site — design
+# Glitch: guide site — design
 
 Date: 2026-10-03
 Status: awaiting review
@@ -51,7 +51,7 @@ ordered steps, and design hints. Capstone steps carry a "Done when" check.
 ## 3. Repository layout
 
 ```
-RoadMap/
+glitch/
   routes/                        # content
     <route-slug>/
       route.yaml
@@ -228,8 +228,8 @@ Format: `<path>[:<line>]: <problem>`, one per line.
 >   counted, then a `[breach] complete` summary and `start <first route>`.
 >   The card is decorative and hidden from screen readers. A faint crystal
 >   grid (SVG) sits behind the hero.
-> - Storage keys keep their `roadmap:` prefix so saved progress and theme
->   choices survive the rename.
+> - Storage keys use the `glitch:` prefix (`glitch:theme`,
+>   `glitch:progress:v1`); nothing was published under the old name.
 
 > **Revision, 2026-10-03 (design checkpoint).** The owner reviewed the
 > Apple-inspired build and asked to switch to the Knockout style captured in
@@ -322,7 +322,7 @@ Visual weight comes instead from:
 
 ### 5.5 Themes and responsiveness
 
-Light and dark themes follow the system setting. *Added 2026-10-03 at the owner's request:* a System / Light / Dark switch in the global nav, saved in `localStorage` under `roadmap:theme` and applied by an inline `<head>` script before first paint. The source file documents
+Light and dark themes follow the system setting. *Added 2026-10-03 at the owner's request:* a System / Light / Dark switch in the global nav, saved in `localStorage` under `glitch:theme` and applied by an inline `<head>` script before first paint. The source file documents
 light only; the dark theme is derived from its dark-tile surfaces and
 reviewed at the design checkpoint.
 
@@ -341,7 +341,7 @@ colour.
 ## 6. Progress
 
 `app/state/progress.ts` is a Zustand store persisted to `localStorage` under
-`roadmap:progress:v1`, holding done stop ids per route slug and the last
+`glitch:progress:v1`, holding done stop ids per route slug and the last
 visited route and stop. Counts use only ids that exist in the current
 content, so stale ids are harmless. The store is read after hydration, so
 prerendered HTML and the first client render match. If `localStorage` is

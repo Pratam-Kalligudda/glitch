@@ -1,7 +1,7 @@
 import type { Config } from "@react-router/dev/config";
 import { loadSite } from "./content/loader";
 
-const routesDir = process.env.ROADMAP_ROUTES_DIR ?? "routes";
+const routesDir = process.env.GLITCH_ROUTES_DIR ?? "routes";
 
 export default {
   ssr: false,

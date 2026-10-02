@@ -1,4 +1,4 @@
-# RoadMap Guide Site Implementation Plan
+# Glitch Guide Site Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node 24, TypeScript, Vite, React 19, React Router 8 (framework mode, `ssr: false` + `prerender`), Radix UI, Motion, Zustand, Zod, unified/remark/rehype, Shiki, Vitest, Testing Library.
 
-**Spec:** `docs/superpowers/specs/2026-10-03-roadmap-generator-design.md`
+**Spec:** `docs/superpowers/specs/2026-10-03-glitch-design.md`
 
 ## Prerequisite (owner action)
 
@@ -120,7 +120,7 @@ Expected: `v24.15.0` or newer. If not, stop and ask the owner to complete the pr
 
 ```json
 {
-  "name": "roadmap",
+  "name": "glitch",
   "private": true,
   "type": "module",
   "engines": { "node": ">=24.15.0" },
@@ -327,7 +327,7 @@ export const stopMd = (title = "B", body = "Text.\n") =>
 
 /** Writes files under a fresh temp `routes` folder and returns that folder. */
 export function writeTree(files: Record<string, string>): string {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "roadmap-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "glitch-"));
   const routes = path.join(root, "routes");
   fs.mkdirSync(routes);
   for (const [rel, content] of Object.entries(files)) {
@@ -778,7 +778,7 @@ git commit -m "Add toolchain, content model and loader"
   - `content/validate.ts`: `validateSite(routes: Route[]): Problem[]`
   - `content/index.ts`: `checkContent(routesDir: string): { routes: Route[]; problems: Problem[] }`
   - `tests/helpers.ts`: `makeStop(id, over?)`, `makePart(id, stops, over?)`, `makeRoute(slug, parts, over?)`
-- The CLI reads the routes folder from the `ROADMAP_ROUTES_DIR` environment variable, default `routes`.
+- The CLI reads the routes folder from the `GLITCH_ROUTES_DIR` environment variable, default `routes`.
 
 - [ ] **Step 1: Append model builders to `tests/helpers.ts`**
 
@@ -974,7 +974,7 @@ function run(routesDir: string) {
   return spawnSync("npx tsx content/cli.ts", {
     shell: true,
     encoding: "utf8",
-    env: { ...process.env, ROADMAP_ROUTES_DIR: routesDir },
+    env: { ...process.env, GLITCH_ROUTES_DIR: routesDir },
   });
 }
 
@@ -1131,7 +1131,7 @@ export function checkContent(routesDir: string): { routes: Route[]; problems: Pr
 import { checkContent } from "./index";
 import { formatProblem } from "./model";
 
-const dir = process.env.ROADMAP_ROUTES_DIR ?? "routes";
+const dir = process.env.GLITCH_ROUTES_DIR ?? "routes";
 const { routes, problems } = checkContent(dir);
 
 if (problems.length > 0) {
@@ -1362,7 +1362,7 @@ Blue plus greys only, to stay within the one-accent rule.
 
 ```ts
 export const codeTheme = {
-  name: "roadmap-dark",
+  name: "glitch-dark",
   type: "dark" as const,
   colors: {
     "editor.background": "#1d1d1f",
@@ -1655,7 +1655,7 @@ Copies each route's `assets/` folder to `public/route-assets/<slug>/`, which Vit
 import fs from "node:fs";
 import path from "node:path";
 
-const routesDir = process.env.ROADMAP_ROUTES_DIR ?? "routes";
+const routesDir = process.env.GLITCH_ROUTES_DIR ?? "routes";
 const out = path.resolve("public/route-assets");
 
 fs.rmSync(out, { recursive: true, force: true });
@@ -1679,7 +1679,7 @@ If the raw-HTML test fails, the plugin order in `renderMarkdown` has been change
 
 - [ ] **Step 9: Verify the asset copy**
 
-Run (Git Bash): `ROADMAP_ROUTES_DIR=tests/fixtures/routes npm run assets && ls public/route-assets/sample`
+Run (Git Bash): `GLITCH_ROUTES_DIR=tests/fixtures/routes npm run assets && ls public/route-assets/sample`
 Expected: `flow.svg`
 
 - [ ] **Step 10: Commit**
@@ -1700,7 +1700,7 @@ git commit -m "Add Markdown renderer and view models"
 **Interfaces:**
 - Consumes: nothing from earlier tasks.
 - Produces (from `app/state/progress.ts`):
-  - `STORAGE_KEY = "roadmap:progress:v1"`
+  - `STORAGE_KEY = "glitch:progress:v1"`
   - `useProgress`: Zustand hook with state `{ done: Record<string, string[]>; lastRoute: string | null; toggle(slug: string, stopId: string): void; visit(slug: string): void }`
   - `whenHydrated(fn: () => void): () => void` runs `fn` once the store has been rehydrated from storage, and returns a cancel function
   - `countDone(done: string[] | undefined, stopIds: string[]): number`
@@ -1716,7 +1716,7 @@ git commit -m "Add Markdown renderer and view models"
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const KEY = "roadmap:progress:v1";
+const KEY = "glitch:progress:v1";
 
 /** A fresh, not-yet-hydrated copy of the store module. */
 async function fresh() {
@@ -1840,7 +1840,7 @@ Expected: FAIL, cannot resolve `../../app/state/progress`.
 import { create } from "zustand";
 import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
 
-export const STORAGE_KEY = "roadmap:progress:v1";
+export const STORAGE_KEY = "glitch:progress:v1";
 
 interface ProgressData {
   /** Done stop ids per route slug. */
@@ -2202,7 +2202,7 @@ git commit -m "Add Git basics sample route"
   - `PathGraphic({ total: number; done: number })`
   - `RouteCard({ route: RouteSummary; done: string[] | undefined })`
   - `ContinueTile({ routes: RouteSummary[] })`
-- Environment variables: `ROADMAP_ROUTES_DIR` (default `routes`), `BASE_PATH` (default `/`, must start and end with `/`), `VITE_REPO_URL` (optional link shown in the footer).
+- Environment variables: `GLITCH_ROUTES_DIR` (default `routes`), `BASE_PATH` (default `/`, must start and end with `/`), `VITE_REPO_URL` (optional link shown in the footer).
 - CSS class names defined here and reused by Task 7: `tile`, `tile-light`, `tile-parchment`, `tile-dark`, `hero-title`, `tile-title`, `tile-lead`, `section-title`, `eyebrow`, `eyebrow-accent`, `fine`, `pill`, `pill-ghost`, `pill-small`, `text-link`, `container`, `container-narrow`, `reveal`, `progress`, `path`.
 
 React Router requires `basename` to begin with Vite's `base`, so both are set to the same `BASE_PATH` value.
@@ -2213,7 +2213,7 @@ React Router requires `basename` to begin with Vite's `base`, so both are set to
 import type { Config } from "@react-router/dev/config";
 import { loadSite } from "./content/loader";
 
-const routesDir = process.env.ROADMAP_ROUTES_DIR ?? "routes";
+const routesDir = process.env.GLITCH_ROUTES_DIR ?? "routes";
 
 export default {
   ssr: false,
@@ -2235,9 +2235,9 @@ import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig, type Plugin } from "vite";
 
 function contentReload(): Plugin {
-  const dir = path.resolve(process.env.ROADMAP_ROUTES_DIR ?? "routes");
+  const dir = path.resolve(process.env.GLITCH_ROUTES_DIR ?? "routes");
   return {
-    name: "roadmap-content-reload",
+    name: "glitch-content-reload",
     configureServer(server) {
       server.watcher.add(dir);
       server.watcher.on("all", (_event, file) => {
@@ -2273,7 +2273,7 @@ import { formatProblem, type Route } from "../content/model";
 import { toSummary, toView, type RouteSummary, type RouteView } from "../content/view";
 
 function load(): Route[] {
-  const dir = path.resolve(process.env.ROADMAP_ROUTES_DIR ?? "routes");
+  const dir = path.resolve(process.env.GLITCH_ROUTES_DIR ?? "routes");
   const { routes, problems } = checkContent(dir);
   if (problems.length > 0) {
     throw new Error(`Content problems:\n${problems.map(formatProblem).join("\n")}`);
@@ -2927,7 +2927,7 @@ export function GlobalNav() {
     <header className="global-nav">
       <nav className="global-nav-inner" aria-label="Site">
         <Link className="global-nav-brand" to="/">
-          RoadMap
+          Glitch
         </Link>
         <Link to="/#routes">Routes</Link>
         <Link to="/#start">Where to start</Link>
@@ -3135,7 +3135,7 @@ export function loader() {
 
 export function meta() {
   return [
-    { title: "RoadMap" },
+    { title: "Glitch" },
     {
       name: "description",
       content: "Hands-on guides: short stops, one idea each, a project at the end.",
@@ -3711,9 +3711,9 @@ export async function loader({ params }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "RoadMap" }];
+  if (!loaderData) return [{ title: "Glitch" }];
   return [
-    { title: `${loaderData.route.title} · RoadMap` },
+    { title: `${loaderData.route.title} · Glitch` },
     { name: "description", content: loaderData.route.summary },
   ];
 }
@@ -4708,7 +4708,7 @@ git commit -m "Add dark theme, responsive layout and phone drawer"
 - Create: `.github/workflows/pages.yml`
 
 **Interfaces:**
-- Consumes: `npm run build`, `ROADMAP_ROUTES_DIR`, `BASE_PATH`, `VITE_REPO_URL`.
+- Consumes: `npm run build`, `GLITCH_ROUTES_DIR`, `BASE_PATH`, `VITE_REPO_URL`.
 - Produces: a static site in `build/client/`, and a workflow that validates, tests, builds and deploys it.
 - The smoke test builds the fixture routes into `build/`. Anyone who wants the real site locally afterwards runs `npm run build` again.
 
@@ -4723,7 +4723,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 const env = (routesDir: string) => ({
   ...process.env,
-  ROADMAP_ROUTES_DIR: routesDir,
+  GLITCH_ROUTES_DIR: routesDir,
   BASE_PATH: "/sub/",
 });
 
@@ -4899,7 +4899,7 @@ git commit -m "Add build smoke test and Pages workflow"
 - [ ] **Step 1: Create `CLAUDE.md`**
 
 ````markdown
-# RoadMap
+# Glitch
 
 A site of hands-on learning guides. Content is Markdown under `routes/`; a React Router app prerenders it to static HTML; GitHub Actions deploys it to GitHub Pages.
 
@@ -4974,7 +4974,7 @@ Commit freely. Do not push unless asked.
 ```markdown
 ---
 name: new-route
-description: Write a new learning route (guide) for the RoadMap site. Use when asked to add, create or write a route, guide or course on a topic.
+description: Write a new learning route (guide) for the Glitch site. Use when asked to add, create or write a route, guide or course on a topic.
 ---
 
 # New route
@@ -5028,7 +5028,7 @@ Commit the route. Push only when the owner asks; a push to `main` publishes the 
 - [ ] **Step 3: Create `README.md`**
 
 ```markdown
-# RoadMap
+# Glitch
 
 Hands-on learning guides. Each guide is a route: short stops, one idea each, and a project at the end.
 

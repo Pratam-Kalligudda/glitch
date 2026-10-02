@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { flattenBuild } from "../../content/flatten-build";
 
 function tree(files: Record<string, string>): string {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "roadmap-build-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "glitch-build-"));
   for (const [rel, content] of Object.entries(files)) {
     fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
     fs.writeFileSync(path.join(dir, rel), content);
