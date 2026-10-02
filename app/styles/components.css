@@ -94,7 +94,8 @@
   transform: translate(-50%, -50%);
   width: max-content;
   font-family: var(--font-display);
-  font-size: 30vw;
+  /* Capped with the headline (184px), so the letters never outgrow the band. */
+  font-size: min(30vw, 440px);
   line-height: 0.8;
   letter-spacing: 0.01em;
   text-transform: uppercase;
