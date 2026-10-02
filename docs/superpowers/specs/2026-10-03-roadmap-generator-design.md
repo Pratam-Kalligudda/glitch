@@ -32,7 +32,7 @@ requirement, not a finish.
 
 ### Out of scope for v1
 
-Search, a manual theme toggle, progress sync or export, Mermaid diagrams,
+Search, progress sync or export, Mermaid diagrams,
 charts (Recharts is reserved for later), interactive stops such as quizzes,
 browser automation tests, a custom domain, and migrating the three existing
 build-routes guides.
@@ -303,7 +303,7 @@ Visual weight comes instead from:
 
 ### 5.5 Themes and responsiveness
 
-Light and dark themes follow the system setting. The source file documents
+Light and dark themes follow the system setting. *Added 2026-10-03 at the owner's request:* a System / Light / Dark switch in the global nav, saved in `localStorage` under `roadmap:theme` and applied by an inline `<head>` script before first paint. The source file documents
 light only; the dark theme is derived from its dark-tile surfaces and
 reviewed at the design checkpoint.
 

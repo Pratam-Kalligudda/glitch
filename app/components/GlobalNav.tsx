@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function GlobalNav() {
   return (
@@ -9,6 +10,7 @@ export function GlobalNav() {
         </Link>
         <Link to="/#routes">Routes</Link>
         <Link to="/#start">Where to start</Link>
+        <ThemeToggle />
       </nav>
     </header>
   );

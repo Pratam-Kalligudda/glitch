@@ -80,12 +80,22 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
           <div className="route-hero-main">
             <h1 className="hero-title">{route.hero || route.title}</h1>
             {route.lede && <p className="hero-lead">{route.lede}</p>}
-            <PathGraphic
-              total={stops.length}
-              done={doneIds.size}
-              labels={stops.map((s) => s.title)}
-              marks={stops.map((s) => doneIds.has(s.id))}
-            />
+            {/* Labelled on wide screens; the compact form keeps readable dots on phones. */}
+            <div className="path-wide-only">
+              <PathGraphic
+                total={stops.length}
+                done={doneIds.size}
+                labels={stops.map((s) => s.title)}
+                marks={stops.map((s) => doneIds.has(s.id))}
+              />
+            </div>
+            <div className="path-narrow-only">
+              <PathGraphic
+                total={stops.length}
+                done={doneIds.size}
+                marks={stops.map((s) => doneIds.has(s.id))}
+              />
+            </div>
           </div>
           <dl className="route-stats">
             <div>

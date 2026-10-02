@@ -130,6 +130,14 @@
 }
 
 @media (max-width: 419px) {
+  .theme-toggle {
+    padding: 6px 8px;
+  }
+
+  .theme-toggle-label {
+    display: none;
+  }
+
   .global-nav-inner {
     gap: var(--s-xs);
   }

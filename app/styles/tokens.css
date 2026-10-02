@@ -64,31 +64,30 @@
 }
 
 /* Dark theme: the page becomes black paper, cards one step lighter.
-   Brand fills (orange, blue, green) and code blocks keep their colours. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+   Brand fills (orange, blue, green) and code blocks keep their colours.
+   The head script in app/theme.ts sets data-theme from the saved choice or the system. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
 
-    --ink: #f2f2f0;
-    --ink-soft: #e2e2e0;
-    --ink-muted: #c4c4c2;
-    --grey: #9a9a9a;
-    --grey-light: #3a3a3a;
+  --ink: #f2f2f0;
+  --ink-soft: #e2e2e0;
+  --ink-muted: #c4c4c2;
+  --grey: #9a9a9a;
+  --grey-light: #3a3a3a;
 
-    --paper: #161616;
-    --surface: #1f1f1f;
+  --paper: #161616;
+  --surface: #1f1f1f;
 
-    --action: #3d86ff;
-    --action-press: #1169fe;
+  --action: #3d86ff;
+  --action-press: #1169fe;
 
-    --grain-light: var(--grain-dark);
-  }
+  --grain-light: var(--grain-dark);
+}
 
-  .global-nav {
-    border-bottom: 1px solid var(--line-on-dark);
-  }
+:root[data-theme="dark"] .global-nav {
+  border-bottom: 1px solid var(--line-on-dark);
+}
 
-  .hero-ghost {
-    opacity: 0.85;
-  }
+:root[data-theme="dark"] .hero-ghost {
+  opacity: 0.85;
 }

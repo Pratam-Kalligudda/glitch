@@ -44,6 +44,34 @@
   text-transform: uppercase;
 }
 
+/* Theme switch: boxed like the nav links, cycles System, Light, Dark. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--line-on-dark);
+  border-radius: var(--r-btn);
+  background: transparent;
+  color: var(--on-dark);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--on-dark);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
 /* Home hero: oversized orange letters cropped behind a black headline. */
 .hero {
   position: relative;
@@ -315,9 +343,21 @@
   stroke: var(--orange);
 }
 
+.path-narrow-only {
+  display: none;
+}
+
 @media (max-width: 833px) {
   .path-label {
     display: none;
+  }
+
+  .path-wide-only {
+    display: none;
+  }
+
+  .path-narrow-only {
+    display: block;
   }
 }
 

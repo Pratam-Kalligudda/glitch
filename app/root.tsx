@@ -15,14 +15,17 @@ import "./styles/responsive.css";
 import { Footer } from "./components/Footer";
 import { GlobalNav } from "./components/GlobalNav";
 import { useProgress } from "./state/progress";
+import { THEME_SCRIPT } from "./theme";
 import type { Route } from "./+types/root";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Applies the saved theme before first paint. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
         <Meta />
         <Links />

@@ -65,6 +65,7 @@ The look follows the Knockout system in `design-md/knockout/DESIGN.md` (local re
 - Buttons are near-square (2px radius) with a trailing arrow and shrink to 0.95 when pressed. Cards and code blocks have a 1.6px black border and 8px radius.
 - No shadows, no gradients.
 - Use the tokens in `app/styles/tokens.css`; do not hard-code colours in components. Use `--surface` for card backgrounds and `--on-orange` for text on orange so the dark theme works.
+- Dark mode is `:root[data-theme="dark"]` in `tokens.css`. The nav switch (System / Light / Dark) saves to `localStorage` and `app/theme.ts` inlines a `<head>` script that sets `data-theme` before paint. Style new UI with tokens and it works in both themes.
 - Motion respects `prefers-reduced-motion`; touch targets are at least 44px.
 
 ## Base path
