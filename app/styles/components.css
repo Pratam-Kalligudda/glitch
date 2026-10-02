@@ -74,23 +74,28 @@
 
 /* Home hero: oversized orange letters cropped behind a black headline. */
 .hero {
-  position: relative;
-  overflow: hidden;
-  padding: 48px var(--gutter) var(--s-section);
+  padding-bottom: var(--s-section);
   background-color: var(--paper);
   background-image: var(--grain-light);
   text-align: center;
 }
 
+/* Full-bleed band that crops the giant letters to the strap and headline. */
+.hero-stage {
+  position: relative;
+  overflow: hidden;
+  padding: 48px var(--gutter) 56px;
+}
+
 .hero-ghost {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: max-content;
   font-family: var(--font-display);
-  font-size: 34vw;
-  line-height: 0.82;
+  font-size: 30vw;
+  line-height: 0.8;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--orange-poster);
@@ -103,6 +108,15 @@
   position: relative;
   width: min(100%, var(--page-max));
   margin-inline: auto;
+}
+
+.hero-after {
+  width: min(100% - 2 * var(--gutter), var(--page-max));
+  padding-top: var(--s-md);
+}
+
+.hero-after .hero-lead {
+  margin-top: 0;
 }
 
 /* Marquee bands: outlined and solid words between heavy rules. */

@@ -88,6 +88,8 @@
   border-bottom: 1px solid var(--line-on-dark);
 }
 
+/* White type cannot sit on solid orange; the ghost letters become an outline. */
 :root[data-theme="dark"] .hero-ghost {
-  opacity: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--orange);
 }
