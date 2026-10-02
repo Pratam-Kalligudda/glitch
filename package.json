@@ -9,7 +9,7 @@
     "assets": "tsx content/copy-assets.ts",
     "dev": "npm run assets && react-router dev",
     "validate": "tsx content/cli.ts",
-    "build": "npm run validate && npm run assets && react-router build",
+    "build": "npm run validate && npm run assets && react-router build && tsx content/flatten-build.ts",
     "typecheck": "react-router typegen && tsc",
     "test": "vitest run"
   },

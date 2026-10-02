@@ -17,6 +17,19 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { route };
 }
 
+/**
+ * Client navigations read the prerendered data file. A slug that was never prerendered
+ * has no data file, so report it as a 404 instead of a decoding error.
+ */
+export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
+  try {
+    return await serverLoader();
+  } catch (error) {
+    if (error instanceof Response) throw error;
+    throw new Response("Not found", { status: 404 });
+  }
+}
+
 export function meta({ loaderData }: Route.MetaArgs) {
   if (!loaderData) return [{ title: "RoadMap" }];
   return [
