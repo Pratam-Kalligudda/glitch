@@ -39,6 +39,38 @@ Length is managed by granularity, not by cutting: one idea per stop, as many sto
 there are ideas, grouped into as many parts as the topic has stages. The reader learns them
 one by one, in order. Never drop, merge or skim a concept to make a route shorter.
 
+### Splitting a topic into a series
+
+A route never splits because it is long. It splits when part of it is a **self-contained
+body of knowledge**: something with its own outcome that makes sense without the rest. Split
+when at least one of these is true:
+
+| Signal | Example |
+|---|---|
+| **Reuse.** Other routes would need the same material. | "Python essentials" sits under a FastAPI route, a Django route and a data route. Written once as its own route, all three list it as a prerequisite instead of repeating it. |
+| **Skippable.** Many readers already know it and should be able to skip it whole. | A reader who knows Python goes straight to FastAPI; a reader who does not starts one route earlier. |
+| **Its own outcome.** It ends with something the reader can do on its own. | "Containers with Docker" ends with a containerised app, before "Deploying to Kubernetes" uses those containers. |
+
+Do not split when the pieces only make sense together, when the cut would leave a route
+without a real outcome, or when the only reason is length.
+
+How a series fits together:
+
+- **Each route is complete.** It has its own baseline, outcome, parts and capstone, and
+  passes the checklist on its own.
+- **Order by `prerequisites` and `number`.** A later route lists the earlier one under
+  `prerequisites` and has a higher `number`. Its card then shows "After <earlier route>".
+- **Link across, do not repeat.** A later route refers back with `[[route-slug/stop-id]]`
+  instead of re-teaching. A one-line reminder is fine; a second explanation is not.
+- **Capstones may continue.** A later route's capstone can start from the earlier route's
+  finished project ("Start from your URL shortener from [[fastapi/step-7-ship-it]]"), as
+  long as it says so in its spec and shows the starting code.
+- **State the reader per route.** "Reader knows" for the later route is the earlier route's
+  outcome.
+
+When an outline grows a part that matches a signal above, propose the split to the owner
+in the outline (section 8) rather than deciding alone.
+
 ## 2. Before writing
 
 1. **Define the outcome.** One sentence: "At the end you can ...". It must name something
@@ -404,6 +436,9 @@ Summary:       Build, test and ship REST APIs ... Capstone: a URL shortener ...
 Reader knows:  Basic Python syntax; has used a terminal.
 Outcome:       You can design, test and deploy a FastAPI service backed by Postgres and Redis.
 Prerequisites: python-basics (or none)
+Series:        none, or the proposed split, e.g.
+               1 python-essentials  -> outcome: ...  (reuse: also under django, data)
+               2 fastapi            -> outcome: ...  prerequisites: [python-essentials]
 
 Part 1  Python essentials        goal: ...
   names-and-mutability       Names, mutability and truthiness
@@ -421,7 +456,9 @@ Capstone coverage:
   ...
 ```
 
-The coverage list shows that every part is used by the capstone.
+The coverage list shows that every part is used by the capstone. When the outline proposes
+a series, give each route its own outline in this format and say which signal from
+"Splitting a topic into a series" (section 1) justifies the split.
 
 ## 9. Checklist
 
@@ -436,6 +473,8 @@ Before calling a route done:
 - [ ] Every capstone step lists tasks with `[[...]]` links, shows full code at the end of
       the step, and has an observable `done_when`.
 - [ ] Every part is used by the capstone.
+- [ ] In a series: each route is complete on its own, later routes list earlier ones in
+      `prerequisites` and link back with `[[route-slug/stop-id]]` instead of repeating.
 - [ ] `draft` removed (or `false`), then `npm run validate` prints `OK` and `npm test`
       passes.
 - [ ] Read top to bottom in `npm run dev`: code, callouts, tables, images and links render.

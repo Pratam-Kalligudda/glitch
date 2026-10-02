@@ -18,7 +18,9 @@ Ask the owner, one question at a time:
 3. What should the capstone project be? Offer a suggestion that needs most of the topic.
 
 There is no size limit (guide, section 1): plan as many stops, parts and capstone steps
-as the topic needs to be complete.
+as the topic needs to be complete. If part of the topic is reusable by other routes,
+skippable for many readers, or has its own outcome, propose splitting it into a series of
+routes (guide, "Splitting a topic into a series"). Never split only because of length.
 
 ## 2. Research
 
