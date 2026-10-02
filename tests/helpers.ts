@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import type { Part, Route, Stop } from "../content/model";
 
 export const FIXTURES = path.resolve("tests/fixtures/routes");
 
@@ -20,4 +21,46 @@ export function writeTree(files: Record<string, string>): string {
     fs.writeFileSync(file, content);
   }
   return routes;
+}
+
+export function makeStop(id: string, over: Partial<Stop> = {}): Stop {
+  return {
+    id,
+    title: id,
+    body: "Text.\n",
+    bodyOffset: 3,
+    isStep: false,
+    file: `routes/x/01-a/01-${id}.md`,
+    ...over,
+  };
+}
+
+export function makePart(id: string, stops: Stop[], over: Partial<Part> = {}): Part {
+  return {
+    id,
+    title: id,
+    goal: "g",
+    kind: "part",
+    intro: "",
+    introOffset: 4,
+    dir: `routes/x/01-${id}`,
+    stops,
+    ...over,
+  };
+}
+
+export function makeRoute(slug: string, parts: Part[], over: Partial<Route> = {}): Route {
+  return {
+    slug,
+    title: slug,
+    number: 1,
+    summary: "s",
+    hero: "",
+    lede: "",
+    prerequisites: [],
+    dir: `routes/${slug}`,
+    assets: [],
+    parts,
+    ...over,
+  };
 }
