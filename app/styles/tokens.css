@@ -36,7 +36,9 @@
   --split: -0.017em 0 0 #3ee0ff, 0.017em 0 0 #ff2e43;
   --split-wide: -0.033em 0 0 #3ee0ff, 0.033em 0 0 #ff2e43;
 
-  /* Faint crystal grid behind the home hero, drawn as SVG like the grain. */
+  /* Faint crystal grid (home hero, footer), drawn as SVG like the grain. --grid suits the
+     page background; --grid-on-dark suits black surfaces in either theme. */
+  --grid-on-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M0 .5H48M.5 0V48' fill='none' stroke='%233ee0ff' stroke-opacity='.14'/%3E%3C/svg%3E");
   --grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M0 .5H48M.5 0V48' fill='none' stroke='%2300779c' stroke-opacity='.2'/%3E%3C/svg%3E");
 
   --line: 1.6px solid var(--ink);
@@ -93,7 +95,7 @@
   --brand-ink: var(--brand);
 
   --grain-light: var(--grain-dark);
-  --grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M0 .5H48M.5 0V48' fill='none' stroke='%233ee0ff' stroke-opacity='.14'/%3E%3C/svg%3E");
+  --grid: var(--grid-on-dark);
 }
 
 :root[data-theme="dark"] .global-nav {
@@ -107,6 +109,15 @@
 .part-head:not(.part-head-capstone),
 .route-stats,
 .code,
-.global-nav {
+.global-nav,
+.footer {
   --brand-ink: var(--brand);
+}
+
+/* The footer is black in both themes, so its text tokens are the dark-theme ones. */
+.footer {
+  --ink: var(--on-dark);
+  --ink-muted: var(--on-dark-muted);
+  --grey: var(--on-dark-dim);
+  --paper: var(--black);
 }

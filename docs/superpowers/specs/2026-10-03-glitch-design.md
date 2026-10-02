@@ -228,6 +228,11 @@ Format: `<path>[:<line>]: <problem>`, one per line.
 >   counted, then a `[breach] complete` summary and `start <first route>`.
 >   The card is decorative and hidden from screen readers. A faint crystal
 >   grid (SVG) sits behind the hero.
+> - The tear flickers for about half a second every 2.5 seconds; reduced
+>   motion keeps it still.
+> - Footer: black with the crystal grid in both themes, the torn GLITCH
+>   wordmark on the left and a small terminal signing off on the right
+>   (`[breach] session still open`, `$ logout`).
 > - Storage keys use the `glitch:` prefix (`glitch:theme`,
 >   `glitch:progress:v1`); nothing was published under the old name.
 

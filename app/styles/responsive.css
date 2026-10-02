@@ -137,6 +137,14 @@
   .footer {
     padding: var(--s-xxl) 0 var(--s-xl);
   }
+
+  .footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer-term {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 419px) {
