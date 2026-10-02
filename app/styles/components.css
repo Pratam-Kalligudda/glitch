@@ -177,7 +177,7 @@
   overflow: hidden;
   border: var(--line);
   border-radius: var(--r-card);
-  background: var(--white);
+  background: var(--surface);
 }
 
 .route-card-top {
@@ -214,7 +214,7 @@
   align-items: flex-start;
   gap: var(--s-sm);
   padding: 28px;
-  background: var(--white);
+  background: var(--surface);
 }
 
 .route-card-bottom .progress {
@@ -227,7 +227,7 @@
 }
 
 .route-card .path-dot {
-  fill: var(--white);
+  fill: var(--surface);
 }
 
 /* A single route becomes a side-by-side split that fills the row. */
@@ -345,7 +345,7 @@
   overflow: hidden;
   padding: var(--s-section) 0 var(--s-xxl);
   border-top: 2px solid var(--ink);
-  background: var(--white);
+  background: var(--surface);
 }
 
 .footer::before,
@@ -578,12 +578,12 @@
 .part-head-capstone {
   background-color: var(--orange);
   background-image: var(--grain-light);
-  color: var(--ink);
+  color: var(--on-orange);
 }
 
 .part-head-capstone .eyebrow,
 .part-head-capstone .part-goal {
-  color: var(--ink);
+  color: var(--on-orange);
 }
 
 /* Stops */
@@ -632,7 +632,7 @@
   padding: 0;
   border: 2px solid var(--ink);
   border-radius: 50%;
-  background: var(--white);
+  background: var(--surface);
   color: var(--white);
   cursor: pointer;
   transition:
@@ -675,5 +675,124 @@
   .global-nav a {
     padding: 8px 10px;
     font-size: 13px;
+  }
+}
+
+/* Phone drawer: the rail slides in from the left on narrow screens. */
+.parts-trigger {
+  display: none;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1.6px solid var(--ink);
+  border-radius: var(--r-btn);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.parts-trigger:active {
+  transform: scale(0.95);
+}
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  width: min(86vw, 340px);
+  padding: 24px 16px;
+  overflow-y: auto;
+  border-right: 2px solid var(--ink);
+  background-color: var(--paper);
+  background-image: var(--grain-light);
+}
+
+.drawer-title {
+  margin: 4px 4px 20px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.drawer-close {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: 1.6px solid var(--ink);
+  border-radius: var(--r-btn);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.drawer-close:active {
+  transform: scale(0.95);
+}
+
+.drawer .rail-link {
+  padding-block: 14px;
+  font-size: 20px;
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes drawer-out {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .drawer[data-state="open"] {
+    animation: drawer-in 0.35s var(--ease);
+  }
+
+  .drawer[data-state="closed"] {
+    animation: drawer-out 0.2s ease-in;
+  }
+
+  .drawer-overlay[data-state="open"] {
+    animation: fade-in 0.2s ease;
+  }
+
+  .drawer-overlay[data-state="closed"] {
+    animation: fade-out 0.2s ease;
   }
 }

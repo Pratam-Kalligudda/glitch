@@ -36,7 +36,7 @@
   padding: 2px 6px;
   border-radius: var(--r-chip);
   background: var(--blush);
-  color: var(--ink);
+  color: var(--black);
   font-family: var(--font-mono);
   font-size: 0.85em;
   letter-spacing: 0;
@@ -159,7 +159,7 @@
   padding: 18px 22px;
   border: var(--line);
   border-radius: var(--r-card);
-  background: var(--white);
+  background: var(--surface);
   font-size: 16px;
 }
 
@@ -173,7 +173,7 @@
   padding: 3px 8px 2px;
   border-radius: var(--r-btn);
   background: var(--ink);
-  color: var(--white);
+  color: var(--paper);
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 400;
@@ -189,7 +189,7 @@
 
 .callout-warning .callout-label {
   background: var(--orange);
-  color: var(--ink);
+  color: var(--on-orange);
 }
 
 /* "Done when": the solution half of the pattern, with a green check badge. */

@@ -3,6 +3,7 @@ import { Marquee } from "../components/Marquee";
 import { PartHeader } from "../components/PartHeader";
 import { PathGraphic } from "../components/PathGraphic";
 import { Rail } from "../components/Rail";
+import { RailDrawer } from "../components/RailDrawer";
 import { Stop } from "../components/Stop";
 import { SubNav } from "../components/SubNav";
 import { getRouteView } from "../content.server";
@@ -56,7 +57,9 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <SubNav title={route.title} done={doneIds.size} total={stops.length} nextId={next?.id ?? null} />
+      <SubNav title={route.title} done={doneIds.size} total={stops.length} nextId={next?.id ?? null}>
+        <RailDrawer parts={route.parts} doneIds={doneIds} active={active} />
+      </SubNav>
 
       <section className="route-hero">
         <div className="container">

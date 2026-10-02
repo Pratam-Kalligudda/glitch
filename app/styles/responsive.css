@@ -1,0 +1,141 @@
+/* Breakpoints (max-width): 1068px, 833px, 640px, 419px.
+   Type already scales with clamp(); these rules change layout. */
+@media (max-width: 1068px) {
+  .route-body {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--s-xl);
+  }
+
+  .card-grid:has(> :only-child) .route-card > * {
+    padding: var(--s-xl);
+  }
+}
+
+@media (max-width: 833px) {
+  .route-body {
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: var(--s-xxl);
+  }
+
+  .route-rail {
+    display: none;
+  }
+
+  .parts-trigger {
+    display: inline-flex;
+  }
+
+  .subnav-count {
+    display: none;
+  }
+
+  .card-grid:has(> :only-child) .route-card {
+    flex-direction: column;
+  }
+
+  .part-head {
+    padding: var(--s-xl) var(--s-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .tile {
+    padding: var(--s-xxl) 16px;
+  }
+
+  .container,
+  .container-narrow,
+  .subnav-inner,
+  .global-nav-inner,
+  .route-body {
+    width: min(100% - 32px, 1220px);
+  }
+
+  .hero {
+    padding: 32px 16px var(--s-xxl);
+  }
+
+  .strap {
+    gap: var(--s-sm);
+    font-size: 16px;
+  }
+
+  .strap::before,
+  .strap::after {
+    height: 8px;
+  }
+
+  .actions .pill {
+    flex: 1 1 100%;
+  }
+
+  .route-card-top,
+  .route-card-bottom,
+  .card-grid:has(> :only-child) .route-card > * {
+    padding: var(--s-lg);
+  }
+
+  .route-card-title {
+    font-size: 36px;
+  }
+
+  .part-head {
+    padding: var(--s-lg) 20px;
+  }
+
+  .part-goal {
+    font-size: 19px;
+  }
+
+  .stop {
+    padding-block: var(--s-lg);
+  }
+
+  .callout {
+    padding: 14px 16px;
+  }
+
+  .callout-done {
+    padding-left: 58px;
+  }
+
+  .callout-done::before {
+    left: 16px;
+  }
+
+  .code pre {
+    padding: 16px;
+    font-size: 13.5px;
+  }
+
+  .subnav-title {
+    font-size: 22px;
+  }
+
+  .footer {
+    padding: var(--s-xxl) 0 var(--s-xl);
+  }
+}
+
+@media (max-width: 419px) {
+  .global-nav-inner {
+    gap: var(--s-xs);
+  }
+
+  .global-nav .global-nav-brand {
+    font-size: 24px;
+  }
+
+  .global-nav a {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .subnav-title {
+    font-size: 18px;
+  }
+
+  .subnav-right {
+    gap: var(--s-xs);
+  }
+}

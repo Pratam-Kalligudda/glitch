@@ -129,7 +129,7 @@ button {
 }
 
 .tile-parchment {
-  background-color: var(--white);
+  background-color: var(--surface);
   background-image: var(--grain-light);
   border-block: 2px solid var(--ink);
   text-align: left;
@@ -153,11 +153,11 @@ button {
 .tile-orange {
   background-color: var(--orange);
   background-image: var(--grain-light);
-  color: var(--ink);
+  color: var(--on-orange);
 }
 
 .tile-orange a:not(.pill) {
-  color: var(--ink);
+  color: var(--on-orange);
   font-weight: 700;
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -262,7 +262,7 @@ button {
 .pill-ghost:hover {
   background: var(--ink);
   border-color: var(--ink);
-  color: var(--white);
+  color: var(--paper);
 }
 
 .tile-dark .pill-ghost {
