@@ -1,5 +1,6 @@
 node_modules/
 build/
-dist/
 .react-router/
+public/route-assets/
 design-md/
+.superpowers/
