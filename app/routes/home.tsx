@@ -34,17 +34,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <section className="hero">
-        {/* The giant letters sit behind the headline only; smaller text gets a clean ground. */}
-        <div className="hero-stage">
-          <span className="hero-ghost" aria-hidden="true">
-            Routes
-          </span>
-          <div className="hero-inner">
-            <p className="strap">Hands-on guides</p>
-            <h1 className="hero-title">Learn by building.</h1>
-          </div>
-        </div>
-        <div className="hero-inner hero-after">
+        <div className="hero-inner">
+          <p className="strap">Hands-on guides</p>
+          <h1 className="hero-title">Learn by building.</h1>
           <p className="hero-lead">Short stops. One idea each. A project at the end.</p>
           {first && (
             <div className="actions">

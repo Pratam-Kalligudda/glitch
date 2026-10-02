@@ -18,7 +18,6 @@
   --line-on-dark: #555555;
 
   --orange: #f25f24;
-  --orange-poster: #ee6a35;
   --on-orange: #000000;
   --action: #1169fe;
   --action-press: #0b55d6;
@@ -86,10 +85,4 @@
 
 :root[data-theme="dark"] .global-nav {
   border-bottom: 1px solid var(--line-on-dark);
-}
-
-/* White type cannot sit on solid orange; the ghost letters become an outline. */
-:root[data-theme="dark"] .hero-ghost {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--orange);
 }

@@ -64,12 +64,8 @@
   }
 
   .hero {
-    padding-bottom: var(--s-xxl);
-  }
-
-  .hero-stage {
     padding-top: 32px;
-    padding-bottom: 40px;
+    padding-bottom: var(--s-xxl);
   }
 
   .strap {
