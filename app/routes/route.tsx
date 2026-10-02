@@ -84,6 +84,7 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
               total={stops.length}
               done={doneIds.size}
               labels={stops.map((s) => s.title)}
+              marks={stops.map((s) => doneIds.has(s.id))}
             />
           </div>
           <dl className="route-stats">

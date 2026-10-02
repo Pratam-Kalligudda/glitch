@@ -32,7 +32,11 @@ export function ContinueTile({ routes }: { routes: RouteSummary[] }) {
           {next ? "Resume" : "Review"}
         </Link>
       </div>
-      <PathGraphic total={ids.length} done={count} />
+      <PathGraphic
+        total={ids.length}
+        done={count}
+        marks={ids.map((id) => done[route.slug]?.includes(id) ?? false)}
+      />
     </motion.section>
   );
 }

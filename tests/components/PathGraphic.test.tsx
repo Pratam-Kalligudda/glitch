@@ -20,6 +20,29 @@ describe("PathGraphic", () => {
     expect(filled(render(<PathGraphic total={4} done={4} />).container)).toBe(4);
   });
 
+  it("fills exactly the stops that are done when given one mark per stop", () => {
+    const { container } = render(
+      <PathGraphic total={5} done={2} marks={[false, true, false, false, true]} />,
+    );
+    const states = [...container.querySelectorAll(".path-dot")].map((d) =>
+      d.classList.contains("path-dot-done"),
+    );
+    expect(states).toEqual([false, true, false, false, true]);
+    expect(container.querySelectorAll(".path-line-done")).toHaveLength(0);
+  });
+
+  it("draws a done segment only between two neighbouring done stops", () => {
+    const { container } = render(
+      <PathGraphic total={4} done={3} marks={[true, false, true, true]} />,
+    );
+    const cx = [...container.querySelectorAll(".path-dot")].map((d) => d.getAttribute("cx"));
+    const segments = [...container.querySelectorAll(".path-line-done")].map((l) => [
+      l.getAttribute("x1"),
+      l.getAttribute("x2"),
+    ]);
+    expect(segments).toEqual([[cx[2], cx[3]]]);
+  });
+
   it("fills in proportion and labels itself", () => {
     const { container, getByRole } = render(<PathGraphic total={44} done={22} />);
     expect(filled(container)).toBe(4);

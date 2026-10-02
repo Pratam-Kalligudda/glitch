@@ -25,7 +25,11 @@ export function RouteCard({ route, done }: Props) {
         <p className="route-card-summary">{route.summary}</p>
       </div>
       <div className="route-card-bottom">
-        <PathGraphic total={total} done={count} />
+        <PathGraphic
+          total={total}
+          done={count}
+          marks={route.stops.map((s) => done?.includes(s.id) ?? false)}
+        />
         <ProgressBar value={count} max={total} label={`${route.title} progress`} />
         <p className="fine">
           {count} of {total} stops · {route.partCount} parts

@@ -49,6 +49,14 @@ describe("RouteCard", () => {
     expect(screen.getByRole("link").textContent).toContain("Review");
   });
 
+  it("fills the path dot of each done stop, not the first ones", () => {
+    const { container } = show(["history"]);
+    const states = [...container.querySelectorAll(".path-dot")].map((d) =>
+      d.classList.contains("path-dot-done"),
+    );
+    expect(states).toEqual([false, false, true]);
+  });
+
   it("ignores done ids that are not in the route", () => {
     show(["init", "gone"]);
     expect(screen.getByText("1 of 3 stops · 3 parts")).toBeTruthy();
