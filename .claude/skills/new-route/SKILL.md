@@ -45,7 +45,7 @@ Run `npm run validate`. Fix every problem it reports and run it again until it p
 
 ## 5. Preview
 
-Run `npm run dev`, open the route in the browser, and read it top to bottom. Check that code blocks, callouts, tables, images and references render as intended, and that the route appears on the landing page and in "Where to start". Give the owner the preview URL.
+Run `npm run dev`, open the route in the browser, and read it top to bottom. Check that code blocks, callouts, tables, images and references render as intended, and that the route appears on the landing page with the right "Start here" or "After …" line. Give the owner the preview URL.
 
 ## 6. Commit
 

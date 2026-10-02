@@ -368,6 +368,23 @@
   color: var(--on-dark);
 }
 
+.route-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-xs);
+}
+
+.route-card-order {
+  padding: 3px 8px;
+  border: 1px solid var(--line-on-dark);
+  border-radius: var(--r-chip);
+  color: var(--on-dark-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
 .route-card-top .eyebrow {
   color: var(--brand-ink);
 }
@@ -510,92 +527,44 @@
   }
 }
 
-/* Where to start, empty state */
-/* Where to start: black step cards in reading order, joined by a line across the cyan. */
-/* Fixed column counts (3, 2 in responsive.css, then 1) so each row's first card is known
-   and gets no joining line. */
-.start-steps {
-  --cols: 3;
+/* Empty state */
+/* How it works: four numbered steps on the cyan band. Text only, no cards, so the band
+   reads as an explanation rather than another list of routes. */
+.how-steps {
   display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  gap: var(--s-lg);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-xl);
   padding: 0;
   list-style: none;
 }
 
-.start-steps > li {
-  position: relative;
+.how-step {
+  padding-top: var(--s-md);
+  border-top: 4px solid var(--on-brand);
 }
 
-/* The joining line: from the previous card's right edge to this one. */
-.start-steps > li::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: calc(-1 * var(--s-lg));
-  width: var(--s-lg);
-  height: 4px;
-  background: var(--on-brand);
-}
-
-.start-steps > li:nth-child(3n + 1)::before {
-  display: none;
-}
-
-.start-step {
-  --brand-ink: var(--brand);
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-xs);
-  height: 100%;
-  padding: 24px 24px 22px;
-  border: 1.6px solid var(--on-brand);
-  border-radius: var(--r-card);
-  background-color: var(--black);
-  background-image: var(--grain-dark);
-  color: var(--on-dark);
-  transition: transform 0.15s ease;
-}
-
-.start-step:hover {
-  transform: translateY(-3px);
-  text-decoration: none;
-}
-
-.start-step:active {
-  transform: scale(0.98);
-}
-
-.start-step .eyebrow {
-  color: var(--brand);
-}
-
-.start-step-title {
+.how-num {
+  display: block;
   font-family: var(--font-display);
-  font-size: clamp(30px, 2.6vw, 40px);
+  font-size: clamp(56px, 6vw, 96px);
   line-height: 1;
+}
+
+.how-title {
+  margin-top: var(--s-sm);
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
-.start-step-needs {
-  color: var(--on-dark-muted);
+.how-text {
+  margin-top: var(--s-xs);
+  max-width: 34ch;
   font-family: var(--font-slab);
   font-size: 18px;
-}
-
-.start-step-meta {
-  margin-top: auto;
-  padding-top: var(--s-sm);
-  color: var(--on-dark-dim);
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .start-step {
-    transition: none;
-  }
+  line-height: 1.45;
 }
 
 .empty {
@@ -637,11 +606,10 @@
 }
 
 .footer-mark {
-  margin-top: var(--s-xl);
+  margin-top: var(--s-sm);
   font-family: var(--font-display);
-  /* Sized so GLITCH spans the content width. */
-  font-size: clamp(96px, 34vw, 640px);
-  line-height: 0.82;
+  font-size: clamp(72px, 11vw, 168px);
+  line-height: 0.85;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }

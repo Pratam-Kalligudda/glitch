@@ -32,6 +32,7 @@ describe("Home", () => {
     show([]);
     expect(screen.getByText(/No routes yet/)).toBeTruthy();
     expect(screen.queryByRole("heading", { name: "Where to start" })).toBeNull();
+    expect(screen.queryByRole("list", { name: "How it works" })).toBeNull();
     expect(screen.queryByText(/Start route/)).toBeNull();
   });
 
@@ -56,13 +57,17 @@ describe("Home", () => {
         ],
       }),
     ]);
-    const list = screen.getByRole("list", { name: "Reading order" });
-    const steps = within(list).getAllByRole("link");
-    expect(steps.map((s) => s.getAttribute("href"))).toEqual(["/a", "/b", "/c"]);
-    expect(steps[0].textContent).toContain("Step 01");
-    expect(steps[0].textContent).toContain("No earlier route");
-    expect(steps[2].textContent).toContain("Step 03");
-    expect(steps[2].textContent).toContain("After Route A and Route B");
+    const card = (title: string) => screen.getByRole("heading", { name: title }).closest("article")!;
+    expect(within(card("Route A")).getByText("Start here")).toBeTruthy();
+    expect(within(card("Route C")).getByText("After Route A and Route B")).toBeTruthy();
+    // Reading order lives on the cards only; no second list repeats the routes.
+    expect(screen.queryByRole("list", { name: "Reading order" })).toBeNull();
+  });
+
+  it("explains how a route works in four steps", () => {
+    show([summary({})]);
+    const how = screen.getByRole("list", { name: "How it works" });
+    expect(within(how).getAllByRole("listitem")).toHaveLength(4);
   });
 
   it("hides the continue tile when there is no saved progress", () => {

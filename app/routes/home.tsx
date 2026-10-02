@@ -22,10 +22,13 @@ export function meta() {
   ];
 }
 
-function list(titles: string[]): string {
-  if (titles.length <= 1) return titles.join("");
-  return `${titles.slice(0, -1).join(", ")} and ${titles[titles.length - 1]}`;
-}
+/** How every route works. Says what the format is; the route cards say what there is. */
+const HOW = [
+  { title: "Pick a route", text: "Each one takes a single tool from nothing to something you use." },
+  { title: "Run each stop", text: "One idea, one working example. Type it, run it, see it work." },
+  { title: "Mark it done", text: "Tick the stop. Progress is saved in this browser." },
+  { title: "Build the capstone", text: "Put the stops together into one real project." },
+];
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const { routes } = loaderData;
@@ -85,25 +88,17 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       </section>
 
       {routes.length > 0 && (
-        <section className="tile tile-brand tile-left" id="start">
+        <section className="tile tile-brand tile-left" id="how">
           <div className="container">
-            <h2 className="section-title">Where to start</h2>
-            {/* One black card per route in reading order, joined into a path across the band. */}
-            <ol className="start-steps" aria-label="Reading order">
-              {routes.map((route, i) => (
-                <li key={route.slug}>
-                  <Link className="start-step" to={`/${route.slug}`}>
-                    <span className="eyebrow">Step {String(i + 1).padStart(2, "0")}</span>
-                    <span className="start-step-title">{route.title}</span>
-                    <span className="start-step-needs">
-                      {route.prerequisites.length === 0
-                        ? "No earlier route"
-                        : `After ${list(route.prerequisites.map((p) => p.title))}`}
-                    </span>
-                    <span className="start-step-meta">
-                      {route.stops.length} stops <span aria-hidden="true">→</span>
-                    </span>
-                  </Link>
+            <h2 className="section-title">How it works</h2>
+            <ol className="how-steps" aria-label="How it works">
+              {HOW.map((step, i) => (
+                <li key={step.title} className="how-step">
+                  <span className="how-num" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="how-title">{step.title}</h3>
+                  <p className="how-text">{step.text}</p>
                 </li>
               ))}
             </ol>

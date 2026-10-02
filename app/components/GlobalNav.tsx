@@ -9,7 +9,7 @@ export function GlobalNav() {
           Glitch
         </Link>
         <Link to="/#routes">Routes</Link>
-        <Link to="/#start">Where to start</Link>
+        <Link to="/#how">How it works</Link>
         <ThemeToggle />
       </nav>
     </header>

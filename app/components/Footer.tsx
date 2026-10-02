@@ -6,6 +6,11 @@ export function Footer() {
         <div className="footer-top">
           <div>
             <p className="footer-made">Made for learning by doing</p>
+            <p className="footer-mark" aria-hidden="true">
+              <span className="breach" data-text="Glitch">
+                Glitch
+              </span>
+            </p>
             <div className="footer-meta">
               <p className="fine">Progress is saved in this browser only.</p>
               {repo && (
@@ -30,12 +35,6 @@ export function Footer() {
             </pre>
           </div>
         </div>
-        {/* The wordmark runs the full width, like a signature under the page. */}
-        <p className="footer-mark" aria-hidden="true">
-          <span className="breach" data-text="Glitch">
-            Glitch
-          </span>
-        </p>
       </div>
     </footer>
   );
