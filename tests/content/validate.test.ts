@@ -23,6 +23,16 @@ describe("validateSite", () => {
     expect(messages(a)).toContain("routes/a/route.yaml: unknown prerequisite 'z'");
   });
 
+  it("requires prerequisites to come earlier in the route order", () => {
+    const a = makeRoute("a", [makePart("p", [makeStop("s")])], { number: 2 });
+    const b = makeRoute("b", [makePart("p", [makeStop("s")])], { prerequisites: ["a"] });
+    expect(messages(a, b)).toContain(
+      "routes/b/route.yaml: prerequisite 'a' must have a lower number than 1",
+    );
+    const self = makeRoute("c", [makePart("p", [makeStop("s")])], { prerequisites: ["c"] });
+    expect(messages(self)).toContain("routes/c/route.yaml: route cannot be its own prerequisite");
+  });
+
   it("rejects a route without parts and a part without stops", () => {
     expect(messages(makeRoute("a", []))).toContain("routes/a: route has no parts");
     const empty = makeRoute("x", [makePart("a", [])]);

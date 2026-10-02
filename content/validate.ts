@@ -16,7 +16,16 @@ export function validateSite(routes: Route[]): Problem[] {
       else numbers.set(route.number, route.slug);
     }
     for (const pre of route.prerequisites) {
+      const other = routes.find((r) => r.slug === pre);
       if (!slugs.has(pre)) out.push({ file: metaFile, message: `unknown prerequisite '${pre}'` });
+      else if (pre === route.slug) {
+        out.push({ file: metaFile, message: "route cannot be its own prerequisite" });
+      } else if (other && other.number >= route.number) {
+        out.push({
+          file: metaFile,
+          message: `prerequisite '${pre}' must have a lower number than ${route.number}`,
+        });
+      }
     }
     if (route.parts.length === 0) out.push({ file: route.dir, message: "route has no parts" });
 
