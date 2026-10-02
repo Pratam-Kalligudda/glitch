@@ -1,7 +1,0 @@
-title: Markdown basics
-number: 2
-summary: "Headings, lists, links, code blocks and tables in GitHub-flavoured Markdown. Capstone: a README for your project."
-hero: Plain text that reads well and renders better.
-lede: Eight short stops. Write once, read it raw or rendered.
-prerequisites: [git-basics]
-checked: 2026-10

@@ -11,7 +11,7 @@ Needs Node 24.15 or newer.
 
 ## Add a route
 
-Content lives in `routes/`, one folder per route. The rules are in `CLAUDE.md`. In Claude Code, ask for a new route and the `new-route` skill takes it from outline to preview.
+Content lives in `routes/`, one folder per route. How to write one, in depth, is in `docs/writing-a-route.md`; the short rules are in `CLAUDE.md`. In Claude Code, ask for a new route and the `new-route` skill takes it from outline to preview.
 
 Check content with `npm run validate`, then `npm test`.
 

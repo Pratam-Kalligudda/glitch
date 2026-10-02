@@ -20,9 +20,12 @@ Node 24.15 or newer is required.
 - `content/` build-time pipeline: load, validate, render, copy assets, flatten the build. No React.
 - `app/` the React app. `app/styles/tokens.css` holds the design tokens.
 - `tests/` Vitest tests and fixture routes.
+- `docs/writing-a-route.md` the guide to writing a route: depth, structure, stop anatomy, capstone, examples.
 - `docs/superpowers/specs/` the design spec; `docs/superpowers/plans/` the implementation plan.
 
 ## Content rules
+
+**Before creating or editing anything under `routes/`, read `docs/writing-a-route.md` in full and follow it.** It sets the depth a route must reach (one topic, 20 to 40 stops, a 5 to 8 step capstone), the structure of parts, stops and capstone steps, and the checklist a route must pass. The rules below are the short form the validator enforces.
 
 ```
 routes/<route-slug>/
@@ -47,13 +50,11 @@ routes/<route-slug>/
 
 Adding a route is only a new folder: the landing page, prerendering, links and the reading order pick it up. `tests/content/routes.test.ts` fails if any route under `routes/` stops validating or rendering.
 
-## Writing stops
+## Writing routes
 
-One idea per stop: one to three short paragraphs, one working example, an optional note. Check commands and library APIs against official documentation, pin versions, and set `checked` to the current month.
+A route is one topic taught in depth, from what the reader already knows to a shipped capstone project, at the level of <https://harsh07may.github.io/build-routes/python-fastapi/>. Never write a vague or overview route: every stop explains what, why and how, with a complete runnable example. `docs/writing-a-route.md` is the authority; when this file and the guide disagree on how to write content, the guide wins.
 
-A capstone has a spec stop, then steps. Each step lists what to do, refers back to earlier stops with `[[...]]`, shows the result, and ends with `done_when`.
-
-To write a new route, use the `new-route` skill.
+To write a new route, use the `new-route` skill, which follows the guide.
 
 ## Design rules
 
