@@ -23,6 +23,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Read aloud, never shown. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 h1,
 h2,
 h3,

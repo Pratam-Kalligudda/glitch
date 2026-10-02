@@ -6,40 +6,70 @@ import type { PartView, StopView } from "../../content/view";
 
 afterEach(cleanup);
 
-const stop = (id: string): StopView => ({ id, title: id, html: "", doneWhenHtml: null, isStep: false });
-const part = (id: string, title: string, ids: string[]): PartView => ({
+const stop = (id: string): StopView => ({ id, title: `Title ${id}`, html: "", doneWhenHtml: null, isStep: false });
+const part = (id: string, title: string, ids: string[], number: number | null = 1): PartView => ({
   id,
   title,
   goal: "",
-  kind: "part",
-  number: 1,
+  kind: number === null ? "capstone" : "part",
+  number,
   introHtml: "",
   stops: ids.map(stop),
 });
 
-const parts = [part("local", "Work locally", ["init", "commit"]), part("share", "Branch and share", ["branch"])];
+const parts = [
+  part("local", "Work locally", ["init", "commit"], 1),
+  part("share", "Branch and share", ["branch"], 2),
+  part("project", "Capstone", ["spec"], null),
+];
+
+const partLink = (name: RegExp) => screen.getByRole("link", { name });
 
 describe("Rail", () => {
-  it("lists parts with done counts and links to each part", () => {
+  it("lists every part, then each part's stops, in reading order", () => {
+    render(<Rail parts={parts} doneIds={new Set()} active={null} />);
+    expect(screen.getAllByRole("link").map((l) => l.getAttribute("href"))).toEqual([
+      "#part-local",
+      "#init",
+      "#commit",
+      "#part-share",
+      "#branch",
+      "#part-project",
+      "#spec",
+    ]);
+    expect(partLink(/Title init/).textContent).toBe("Title init");
+  });
+
+  it("numbers parts, marks the capstone, and shows done counts", () => {
     render(<Rail parts={parts} doneIds={new Set(["init", "gone"])} active={null} />);
-    const links = screen.getAllByRole("link");
-    expect(links.map((l) => l.getAttribute("href"))).toEqual(["#part-local", "#part-share"]);
-    expect(links[0].textContent).toBe("Work locally1/2");
-    expect(links[1].textContent).toBe("Branch and share0/1");
+    expect(partLink(/Work locally/).textContent).toBe("1Work locally1/2");
+    expect(partLink(/Branch and share/).textContent).toBe("2Branch and share0/1");
+    expect(partLink(/Capstone/).closest("li")?.className).toContain("is-capstone");
+  });
+
+  it("marks done stops for sight and for screen readers", () => {
+    render(<Rail parts={parts} doneIds={new Set(["init"])} active={null} />);
+    const done = partLink(/Title init/);
+    const open = partLink(/Title commit/);
+    expect(done.className).toContain("is-done");
+    expect(done.querySelector(".sr-only")?.textContent?.trim()).toBe("(done)");
+    expect(open.className).not.toContain("is-done");
+    expect(open.querySelector(".sr-only")).toBeNull();
   });
 
   it("marks the active part", () => {
     render(<Rail parts={parts} doneIds={new Set()} active="share" />);
-    const [first, second] = screen.getAllByRole("link");
-    expect(first.getAttribute("aria-current")).toBeNull();
-    expect(second.getAttribute("aria-current")).toBe("true");
-    expect(second.className).toContain("is-active");
+    expect(partLink(/Work locally/).getAttribute("aria-current")).toBeNull();
+    const current = partLink(/Branch and share/);
+    expect(current.getAttribute("aria-current")).toBe("true");
+    expect(current.className).toContain("is-active");
   });
 
-  it("calls onNavigate when a part is chosen", () => {
+  it("calls onNavigate when a part or a stop is chosen", () => {
     const onNavigate = vi.fn();
     render(<Rail parts={parts} doneIds={new Set()} active={null} onNavigate={onNavigate} />);
-    fireEvent.click(screen.getAllByRole("link")[0]);
-    expect(onNavigate).toHaveBeenCalledTimes(1);
+    fireEvent.click(partLink(/Work locally/));
+    fireEvent.click(partLink(/Title commit/));
+    expect(onNavigate).toHaveBeenCalledTimes(2);
   });
 });

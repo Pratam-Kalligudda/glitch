@@ -550,27 +550,39 @@
   padding-block: var(--s-section);
 }
 
+/* The rail scrolls on its own when a long route outgrows the screen. */
 .route-rail {
+  --rail-top: calc(var(--nav-h) + var(--subnav-h) + 24px);
   position: sticky;
-  top: calc(var(--nav-h) + var(--subnav-h) + 24px);
+  top: var(--rail-top);
   align-self: start;
+  max-height: calc(100vh - var(--rail-top) - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
+
+.rail {
+  --badge: 28px;
 }
 
 .rail ol {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 2px solid var(--ink);
+}
+
+/* Rail: a numbered badge per part, its stops hanging from a line beneath. */
+.rail-part + .rail-part {
+  margin-top: var(--s-md);
 }
 
 .rail-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: var(--badge) minmax(0, 1fr) auto;
+  align-items: center;
   gap: var(--s-sm);
-  padding: 14px 4px 14px 14px;
-  border-bottom: 1px solid var(--grey-light);
-  border-left: 4px solid transparent;
+  padding-block: 6px;
   color: var(--ink);
   font-family: var(--font-display);
   font-size: 18px;
@@ -579,24 +591,83 @@
   text-transform: uppercase;
 }
 
-.rail-link:hover {
+.rail-link:hover,
+.rail-stop:hover {
   color: var(--orange);
   text-decoration: none;
 }
 
+.rail-badge {
+  display: grid;
+  place-items: center;
+  width: var(--badge);
+  height: var(--badge);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.is-capstone .rail-badge {
+  background: var(--orange);
+  color: var(--on-orange);
+}
+
 .rail-link.is-active {
-  border-left-color: var(--orange);
   color: var(--orange);
 }
 
+.rail-link.is-active .rail-badge {
+  background: var(--orange);
+  color: var(--on-orange);
+}
+
 .rail-count {
-  flex: none;
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0;
   color: var(--grey);
   font-variant-numeric: tabular-nums;
+}
+
+/* The line runs through the badge centre; each stop hangs a ring on it. */
+.rail .rail-stops {
+  margin: 2px 0 0 calc(var(--badge) / 2 - 1px);
+  border-left: 2px solid var(--grey);
+}
+
+.rail-stop {
+  position: relative;
+  display: block;
+  padding: 5px 0 5px 22px;
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.rail-stop::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: -7px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--grey);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.rail-stop.is-done::before {
+  border-color: var(--success);
+  background: var(--success);
+}
+
+.is-capstone .rail-stops {
+  border-left-color: var(--orange);
 }
 
 /* Parts: every header is a black card; the capstone is orange. */
@@ -820,9 +891,22 @@
   transform: scale(0.95);
 }
 
+/* Touch: every rail row is at least 44px tall. */
 .drawer .rail-link {
-  padding-block: 14px;
+  min-height: 44px;
   font-size: 20px;
+}
+
+.drawer .rail-stop {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 8px;
+  font-size: 16px;
+}
+
+.drawer .rail-stop::before {
+  top: calc(50% - 6px);
 }
 
 @keyframes drawer-in {
