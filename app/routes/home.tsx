@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { ContinueTile } from "../components/ContinueTile";
+import { Marquee } from "../components/Marquee";
 import { PathGraphic } from "../components/PathGraphic";
 import { RouteCard } from "../components/RouteCard";
 import { getSummaries } from "../content.server";
@@ -32,20 +33,28 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <section className="tile tile-light">
-        <h1 className="hero-title">Learn by building.</h1>
-        <p className="tile-lead">Short stops. One idea each. A project at the end.</p>
-        {first && (
-          <div className="actions">
-            <Link className="pill" to={`/${first.slug}`}>
-              Start route {first.number}
-            </Link>
-            <a className="pill pill-ghost" href="#routes">
-              See all routes
-            </a>
-          </div>
-        )}
+      <section className="hero">
+        <span className="hero-ghost" aria-hidden="true">
+          Routes
+        </span>
+        <div className="hero-inner">
+          <p className="strap">Hands-on guides</p>
+          <h1 className="hero-title">Learn by building.</h1>
+          <p className="hero-lead">Short stops. One idea each. A project at the end.</p>
+          {first && (
+            <div className="actions">
+              <Link className="pill" to={`/${first.slug}`}>
+                Start route {first.number}
+              </Link>
+              <a className="pill pill-ghost" href="#routes">
+                See all routes
+              </a>
+            </div>
+          )}
+        </div>
       </section>
+
+      <Marquee items={["Short stops", "One idea each", "Working examples", "Build the capstone"]} />
 
       <ContinueTile routes={routes} />
 
@@ -68,7 +77,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       </section>
 
       {routes.length > 0 && (
-        <section className="tile tile-dark tile-left" id="start">
+        <section className="tile tile-orange tile-left" id="start">
           <div className="container">
             <h2 className="section-title">Where to start</h2>
             <ul className="start-list" aria-label="Reading order">

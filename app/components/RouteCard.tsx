@@ -9,6 +9,7 @@ interface Props {
   done: string[] | undefined;
 }
 
+/** Problem/solution split: what the route is on black, where you stand on white. */
 export function RouteCard({ route, done }: Props) {
   const total = route.stops.length;
   const count = countDone(
@@ -18,17 +19,21 @@ export function RouteCard({ route, done }: Props) {
   const action = count === 0 ? "Start" : count === total ? "Review" : "Resume";
   return (
     <article className="route-card reveal">
-      <PathGraphic total={total} done={count} />
-      <p className="eyebrow">Route {route.number}</p>
-      <h3 className="route-card-title">{route.title}</h3>
-      <p className="route-card-summary">{route.summary}</p>
-      <ProgressBar value={count} max={total} label={`${route.title} progress`} />
-      <p className="fine">
-        {count} of {total} stops · {route.partCount} parts
-      </p>
-      <Link className="text-link" to={`/${route.slug}`}>
-        {action} <span aria-hidden="true">›</span>
-      </Link>
+      <div className="route-card-top">
+        <p className="eyebrow">Route {route.number}</p>
+        <h3 className="route-card-title">{route.title}</h3>
+        <p className="route-card-summary">{route.summary}</p>
+      </div>
+      <div className="route-card-bottom">
+        <PathGraphic total={total} done={count} />
+        <ProgressBar value={count} max={total} label={`${route.title} progress`} />
+        <p className="fine">
+          {count} of {total} stops · {route.partCount} parts
+        </p>
+        <Link className="pill" to={`/${route.slug}`}>
+          {action}
+        </Link>
+      </div>
     </article>
   );
 }

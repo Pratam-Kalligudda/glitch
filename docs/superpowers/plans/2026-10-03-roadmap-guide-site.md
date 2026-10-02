@@ -24,6 +24,8 @@ nvm use 24
 
 Then `node -v` must print `v24.15.0` or newer. nvm-windows switches Node for the whole machine, which is why this is the owner's step.
 
+> **Revision, 2026-10-03.** At the Task 8 checkpoint the owner switched the visual system to Knockout (spec section 5, revision note). The colour, type, radius, pill and "weight 500" constraints below are superseded by that note; Tasks 9 to 11 use the tokens in `app/styles/tokens.css`.
+
 ## Global Constraints
 
 - Node ≥ 24.15.0 (`.nvmrc` contains `24`; `package.json` `engines.node` is `>=24.15.0`).

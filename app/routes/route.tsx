@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { Marquee } from "../components/Marquee";
 import { PartHeader } from "../components/PartHeader";
 import { PathGraphic } from "../components/PathGraphic";
 import { Rail } from "../components/Rail";
@@ -57,16 +58,20 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
     <>
       <SubNav title={route.title} done={doneIds.size} total={stops.length} nextId={next?.id ?? null} />
 
-      <section className="tile tile-light route-hero">
-        <p className="eyebrow">Route {route.number}</p>
-        <h1 className="hero-title">{route.hero || route.title}</h1>
-        {route.lede && <p className="tile-lead">{route.lede}</p>}
-        <PathGraphic
-          total={stops.length}
-          done={doneIds.size}
-          labels={stops.map((s) => s.title)}
-        />
+      <section className="route-hero">
+        <div className="container">
+          <p className="strap">Route {route.number}</p>
+          <h1 className="hero-title">{route.hero || route.title}</h1>
+          {route.lede && <p className="hero-lead">{route.lede}</p>}
+          <PathGraphic
+            total={stops.length}
+            done={doneIds.size}
+            labels={stops.map((s) => s.title)}
+          />
+        </div>
       </section>
+
+      <Marquee items={route.parts.map((p) => p.title)} tone="dark" />
 
       <div className="route-body" onClick={copyCode}>
         <aside className="route-rail">

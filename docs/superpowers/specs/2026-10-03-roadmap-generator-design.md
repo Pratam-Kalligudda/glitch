@@ -212,6 +212,27 @@ Format: `<path>[:<line>]: <problem>`, one per line.
 
 ## 5. Visual design
 
+> **Revision, 2026-10-03 (design checkpoint).** The owner reviewed the
+> Apple-inspired build and asked to switch to the Knockout style captured in
+> `design-md/knockout/DESIGN.md` (from madewithknockout.com). That system
+> supersedes sections 5.1 to 5.3 where they conflict:
+>
+> - Type: Anton (uppercase display), Roboto Slab (leads, labels), Roboto 400
+>   body at 18px / 1.6, IBM Plex Mono for code. Weights 400, 500, 700.
+> - Colour: black, paper `#f2f2f0` and orange `#f25f24` carry the brand.
+>   Blue `#1169fe` is reserved for actions. Green `#46b887` marks done and
+>   "Done when" only. Blush `#ffdede` for inline code.
+> - Fills carry a locally generated paper-grain texture (SVG noise).
+> - Buttons are near-square (2px radius) with a trailing arrow; cards and code
+>   blocks have a 1.6px black border and 8px radius. No shadows, no gradients.
+> - Section dividers are marquee bands of outlined and solid words.
+> - Route cards and part headers use the black/white problem-solution split;
+>   the capstone header is orange.
+>
+> Unchanged: no raw HTML, motion respects `prefers-reduced-motion`, touch
+> targets of at least 44px, press state `scale(0.95)`, light/dark and
+> breakpoints from 5.5, the route-path graphic.
+
 The design follows the Apple-inspired system in `design-md/apple/DESIGN.md`.
 The owner reviewed a rough mockup and approved the direction on the
 understanding that the real pages will be considerably richer.

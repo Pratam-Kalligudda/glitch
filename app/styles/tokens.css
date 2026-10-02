@@ -1,51 +1,57 @@
+/* Knockout-inspired tokens: black, paper and orange carry the brand;
+   one blue is reserved for actions. See design-md/knockout/DESIGN.md. */
 :root {
   color-scheme: light;
 
-  --accent: #0066cc;
-  --accent-fill: #0066cc;
-  --accent-focus: #0071e3;
-  --accent-on-dark: #2997ff;
-  --on-accent: #ffffff;
-
-  --ink: #1d1d1f;
+  --ink: #000000;
+  --ink-soft: #111111;
   --ink-muted: #333333;
-  --ink-faint: #7a7a7a;
+  --grey: #6b6b6b;
+  --grey-light: #d8d6d0;
 
-  --canvas: #ffffff;
-  --parchment: #f5f5f7;
-  --card: #ffffff;
-  --tile-dark: #272729;
-  --black: #000000;
+  --paper: #f2f2f0;
+  --white: #ffffff;
+  --black: #0b0b0b;
   --on-dark: #ffffff;
-  --on-dark-muted: #cccccc;
+  --on-dark-muted: #c9c9c9;
+  --line-on-dark: #555555;
 
-  --hairline: #e0e0e0;
-  --divider: #f0f0f0;
-  --nav-frost: rgba(245, 245, 247, 0.8);
-  --nav-line: rgba(0, 0, 0, 0.08);
+  --orange: #f25f24;
+  --orange-poster: #ee6a35;
+  --action: #1169fe;
+  --action-press: #0b55d6;
+  --on-action: #ffffff;
+  --success: #46b887;
+  --mint: #4fe9a4;
+  --blush: #ffdede;
 
-  --code-bg: #1d1d1f;
-  --code-ink: #f5f5f7;
-  --code-faint: #a1a1a6;
-  --warning: #b25000;
+  --line: 1.6px solid var(--ink);
 
-  --r-sm: 8px;
-  --r-lg: 18px;
-  --r-pill: 9999px;
+  --r-btn: 2px;
+  --r-chip: 3px;
+  --r-card: 8px;
 
   --s-xxs: 4px;
   --s-xs: 8px;
   --s-sm: 12px;
-  --s-md: 17px;
+  --s-md: 16px;
   --s-lg: 24px;
-  --s-xl: 32px;
-  --s-xxl: 48px;
-  --s-section: 80px;
+  --s-xl: 36px;
+  --s-xxl: 62px;
+  --s-section: 84px;
+  --s-huge: 132px;
 
-  --nav-h: 44px;
-  --subnav-h: 52px;
+  --nav-h: 64px;
+  --subnav-h: 56px;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Inter Variable", "Segoe UI", sans-serif;
+  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --font-slab: "Roboto Slab", Georgia, serif;
+  --font-sans: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Paper grain, drawn locally as SVG noise. Dark specks for light fills,
+     light specks for dark fills. */
+  --grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0 0 0 -.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .14 0 0 0 -.045'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

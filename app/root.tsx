@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from "react-router";
-import "@fontsource-variable/inter";
+import "@fontsource/anton/400.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "@fontsource/roboto-slab/400.css";
+import "@fontsource/roboto-slab/700.css";
 import "@fontsource/ibm-plex-mono/400.css";
 import "./styles/tokens.css";
 import "./styles/global.css";

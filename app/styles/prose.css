@@ -1,4 +1,8 @@
 /* Rendered Markdown. Class names come from content/render.ts. */
+.prose {
+  line-height: 1.65;
+}
+
 .prose > * + * {
   margin-top: var(--s-md);
 }
@@ -12,29 +16,34 @@
   margin-top: 6px;
 }
 
+.prose li::marker {
+  font-weight: 700;
+}
+
 .prose strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .prose blockquote {
   margin: 0;
   padding-left: var(--s-md);
-  border-left: 2px solid var(--hairline);
-  color: var(--ink-muted);
+  border-left: 4px solid var(--orange);
+  font-family: var(--font-slab);
 }
 
 .prose :not(pre) > code,
 .callout :not(pre) > code {
-  font-family: var(--font-mono);
-  font-size: 0.88em;
-  letter-spacing: 0;
   padding: 2px 6px;
-  border-radius: 5px;
-  background: var(--parchment);
+  border-radius: var(--r-chip);
+  background: var(--blush);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  letter-spacing: 0;
 }
 
-.callout :not(pre) > code {
-  background: var(--card);
+.prose a.ref {
+  font-weight: 700;
 }
 
 .prose table {
@@ -42,53 +51,61 @@
   max-width: 100%;
   overflow-x: auto;
   border-collapse: collapse;
-  font-size: 15px;
+  border-top: 2px solid var(--ink);
+  font-size: 16px;
 }
 
 .prose th,
 .prose td {
-  padding: 10px 16px 10px 0;
-  border-bottom: 1px solid var(--hairline);
+  padding: 12px 20px 12px 0;
+  border-bottom: 1px solid var(--grey-light);
   text-align: left;
   vertical-align: top;
 }
 
 .prose th {
-  font-weight: 600;
+  font-family: var(--font-slab);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .prose img {
   max-width: 100%;
   height: auto;
-  border-radius: var(--r-sm);
+  border: var(--line);
+  border-radius: var(--r-card);
 }
 
-/* Code blocks: dark in both themes. */
+/* Code blocks: black paper card with a hard border. */
 .code {
   position: relative;
   overflow: hidden;
-  border-radius: var(--r-lg);
-  background: var(--code-bg);
-  color: var(--code-ink);
+  border: var(--line);
+  border-radius: var(--r-card);
+  background-color: var(--black);
+  background-image: var(--grain-dark);
+  color: var(--paper);
 }
 
 .code figcaption {
   padding: 12px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--line-on-dark);
+  color: var(--orange);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0;
-  color: var(--code-faint);
 }
 
 .code pre {
   margin: 0;
-  padding: 18px 20px;
+  padding: 20px 22px;
   overflow-x: auto;
   background: transparent !important;
   font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 14.5px;
+  line-height: 1.65;
   letter-spacing: 0;
 }
 
@@ -100,12 +117,16 @@
   position: absolute;
   top: 8px;
   right: 10px;
-  padding: 4px 10px;
-  border: 0;
-  border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--code-ink);
+  padding: 6px 12px;
+  border: 1px solid var(--line-on-dark);
+  border-radius: var(--r-btn);
+  background: var(--black);
+  color: var(--on-dark);
+  font-family: var(--font-sans);
   font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
   opacity: 0;
   transition:
@@ -118,6 +139,10 @@
   opacity: 1;
 }
 
+.copy:hover {
+  border-color: var(--on-dark);
+}
+
 .copy:active {
   transform: scale(0.95);
 }
@@ -128,12 +153,14 @@
   }
 }
 
-/* Callouts */
+/* Callouts: white cards with a hard border and a stamped label. */
 .callout {
-  padding: var(--s-md) var(--s-lg);
-  border-radius: var(--r-lg);
-  background: var(--parchment);
-  font-size: 15px;
+  position: relative;
+  padding: 18px 22px;
+  border: var(--line);
+  border-radius: var(--r-card);
+  background: var(--white);
+  font-size: 16px;
 }
 
 .callout > * + * {
@@ -141,20 +168,54 @@
 }
 
 .callout-label {
-  font-weight: 600;
-  margin-right: 4px;
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 8px 2px;
+  border-radius: var(--r-btn);
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
+.callout-warning {
+  border-left: 8px solid var(--orange);
 }
 
 .callout-warning .callout-label {
-  color: var(--warning);
+  background: var(--orange);
+  color: var(--ink);
 }
 
+/* "Done when": the solution half of the pattern, with a green check badge. */
 .callout-done {
-  margin-top: var(--s-md);
+  margin-top: var(--s-lg);
+  padding-left: 66px;
+}
+
+.callout-done::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--success)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 16px no-repeat;
 }
 
 .callout-done .callout-label {
-  color: var(--accent);
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 18px;
 }
 
 .callout-done .callout-body,
