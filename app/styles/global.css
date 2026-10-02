@@ -61,12 +61,12 @@ button {
 }
 
 .container {
-  width: min(100% - 48px, 1220px);
+  width: min(100% - 2 * var(--gutter), var(--page-max));
   margin-inline: auto;
 }
 
 .container-narrow {
-  width: min(100% - 48px, 980px);
+  width: min(100% - 2 * var(--gutter), 980px);
 }
 
 .eyebrow {
@@ -110,13 +110,13 @@ button {
 
 /* Tiles: full-bleed bands. Every large fill carries paper grain. */
 .tile {
-  padding: var(--s-section) 24px;
+  padding: var(--s-section) var(--gutter);
   text-align: center;
 }
 
 .tile > .container {
   width: 100%;
-  max-width: 1220px;
+  max-width: var(--page-max);
 }
 
 .tile-left {

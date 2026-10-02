@@ -13,7 +13,7 @@
   align-items: center;
   gap: var(--s-sm);
   height: 100%;
-  width: min(100% - 48px, 1340px);
+  width: min(100% - 2 * var(--gutter), var(--page-max));
   margin-inline: auto;
 }
 
@@ -48,7 +48,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 48px 24px var(--s-section);
+  padding: 48px var(--gutter) var(--s-section);
   background-color: var(--paper);
   background-image: var(--grain-light);
   text-align: center;
@@ -73,7 +73,7 @@
 
 .hero-inner {
   position: relative;
-  width: min(100%, 1220px);
+  width: min(100%, var(--page-max));
   margin-inline: auto;
 }
 
@@ -416,7 +416,7 @@
   justify-content: space-between;
   gap: var(--s-md);
   height: 100%;
-  width: min(100% - 48px, 1220px);
+  width: min(100% - 2 * var(--gutter), var(--page-max));
   margin-inline: auto;
 }
 
@@ -471,12 +471,61 @@
   margin-inline: 0;
 }
 
+/* Wide screens: title on the left, a stats card on the right. */
+.route-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  column-gap: var(--s-xxl);
+  align-items: end;
+}
+
+.route-hero-grid > .strap {
+  grid-column: 1 / -1;
+}
+
+.route-stats {
+  margin: 0;
+  overflow: hidden;
+  border: var(--line);
+  border-radius: var(--r-card);
+  background-color: var(--black);
+  background-image: var(--grain-dark);
+  color: var(--on-dark);
+}
+
+.route-stats > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-md);
+  padding: var(--s-md) var(--s-lg);
+}
+
+.route-stats > div + div {
+  border-top: 1px solid var(--line-on-dark);
+}
+
+.route-stats dt {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.route-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5vw, 88px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
 .route-body {
   display: grid;
-  grid-template-columns: 260px minmax(0, 780px);
-  justify-content: space-between;
-  gap: var(--s-xxl);
-  width: min(100% - 48px, 1220px);
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: clamp(36px, 4vw, 96px);
+  width: min(100% - 2 * var(--gutter), var(--page-max));
   margin-inline: auto;
   padding-block: var(--s-section);
 }
@@ -559,6 +608,7 @@
 }
 
 .part-goal {
+  max-width: 60ch;
   margin-top: var(--s-sm);
   font-family: var(--font-slab);
   font-size: 22px;

@@ -75,15 +75,31 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
       </SubNav>
 
       <section className="route-hero">
-        <div className="container">
+        <div className="container route-hero-grid">
           <p className="strap">Route {route.number}</p>
-          <h1 className="hero-title">{route.hero || route.title}</h1>
-          {route.lede && <p className="hero-lead">{route.lede}</p>}
-          <PathGraphic
-            total={stops.length}
-            done={doneIds.size}
-            labels={stops.map((s) => s.title)}
-          />
+          <div className="route-hero-main">
+            <h1 className="hero-title">{route.hero || route.title}</h1>
+            {route.lede && <p className="hero-lead">{route.lede}</p>}
+            <PathGraphic
+              total={stops.length}
+              done={doneIds.size}
+              labels={stops.map((s) => s.title)}
+            />
+          </div>
+          <dl className="route-stats">
+            <div>
+              <dt>Stops</dt>
+              <dd>{stops.length}</dd>
+            </div>
+            <div>
+              <dt>Parts</dt>
+              <dd>{route.parts.filter((p) => p.kind !== "capstone").length}</dd>
+            </div>
+            <div>
+              <dt>Done</dt>
+              <dd>{doneIds.size}</dd>
+            </div>
+          </dl>
         </div>
       </section>
 

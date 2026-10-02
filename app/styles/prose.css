@@ -7,6 +7,16 @@
   margin-top: var(--s-md);
 }
 
+/* Running text keeps a readable line length; code, tables and images use the full column. */
+.prose > p,
+.prose > ul,
+.prose > ol,
+.prose > blockquote,
+.part-intro,
+.callout {
+  max-width: var(--measure);
+}
+
 .prose ul,
 .prose ol {
   padding-left: 1.3em;
@@ -48,6 +58,7 @@
 
 .prose table {
   display: block;
+  width: max-content;
   max-width: 100%;
   overflow-x: auto;
   border-collapse: collapse;

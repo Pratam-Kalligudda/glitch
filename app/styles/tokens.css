@@ -43,6 +43,11 @@
   --s-section: 84px;
   --s-huge: 132px;
 
+  /* Page frame: fluid gutters, content fills the screen up to a wide cap. */
+  --gutter: clamp(16px, 4vw, 72px);
+  --page-max: 1920px;
+  --measure: 80ch;
+
   --nav-h: 64px;
   --subnav-h: 56px;
 

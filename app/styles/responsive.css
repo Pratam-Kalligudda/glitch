@@ -1,6 +1,26 @@
 /* Breakpoints (max-width): 1068px, 833px, 640px, 419px.
    Type already scales with clamp(); these rules change layout. */
 @media (max-width: 1068px) {
+  .route-hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-xl);
+  }
+
+  .route-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .route-stats > div + div {
+    border-top: 0;
+    border-left: 1px solid var(--line-on-dark);
+  }
+
+  .route-stats > div {
+    flex-direction: column;
+    gap: var(--s-xs);
+  }
+
   .route-body {
     grid-template-columns: 220px minmax(0, 1fr);
     gap: var(--s-xl);
@@ -40,19 +60,11 @@
 
 @media (max-width: 640px) {
   .tile {
-    padding: var(--s-xxl) 16px;
-  }
-
-  .container,
-  .container-narrow,
-  .subnav-inner,
-  .global-nav-inner,
-  .route-body {
-    width: min(100% - 32px, 1220px);
+    padding-block: var(--s-xxl);
   }
 
   .hero {
-    padding: 32px 16px var(--s-xxl);
+    padding-block: 32px var(--s-xxl);
   }
 
   .strap {
