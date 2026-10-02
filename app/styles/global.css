@@ -94,6 +94,15 @@ button {
   color: var(--on-dark);
 }
 
+.tile-dark a:not(.pill) {
+  color: var(--accent-on-dark);
+}
+
+/* Left-aligned tile on the shared content grid. */
+.tile-left {
+  text-align: left;
+}
+
 .tile-dark .tile-lead {
   color: var(--on-dark-muted);
 }
@@ -109,6 +118,7 @@ button {
   letter-spacing: -0.005em;
   max-width: 18ch;
   margin-inline: auto;
+  text-wrap: balance;
 }
 
 .tile-title {
@@ -131,8 +141,9 @@ button {
   line-height: 1.14;
   letter-spacing: 0.007em;
   margin-top: var(--s-sm);
-  max-width: 32ch;
+  max-width: 40ch;
   margin-inline: auto;
+  text-wrap: balance;
 }
 
 .actions {
@@ -218,4 +229,10 @@ button {
   * {
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Containers inside tiles share the nav and footer left edge. */
+.tile > .container {
+  width: 100%;
+  max-width: 1392px;
 }

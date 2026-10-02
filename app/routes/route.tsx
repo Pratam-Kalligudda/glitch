@@ -61,7 +61,11 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
         <p className="eyebrow">Route {route.number}</p>
         <h1 className="hero-title">{route.hero || route.title}</h1>
         {route.lede && <p className="tile-lead">{route.lede}</p>}
-        <PathGraphic total={stops.length} done={doneIds.size} />
+        <PathGraphic
+          total={stops.length}
+          done={doneIds.size}
+          labels={stops.map((s) => s.title)}
+        />
       </section>
 
       <div className="route-body" onClick={copyCode}>

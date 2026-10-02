@@ -1,24 +1,30 @@
 interface Props {
   total: number;
   done: number;
+  /** Optional stop titles drawn under the dots. Used only when there is one per dot. */
+  labels?: string[];
 }
 
-const GAP = 56;
 const R = 7;
 const PAD = R + 2;
 
+const shorten = (s: string) => (s.length > 20 ? `${s.slice(0, 19)}…` : s);
+
 /** Stops joined by a line, filled as the reader progresses. At most eight dots. */
-export function PathGraphic({ total, done }: Props) {
+export function PathGraphic({ total, done, labels }: Props) {
   const dots = Math.min(Math.max(total, 2), 8);
   const filled = total > 0 ? Math.round((done / total) * dots) : 0;
-  const width = (dots - 1) * GAP + PAD * 2;
-  const x = (i: number) => PAD + i * GAP;
+  const named = labels && labels.length === dots ? labels : null;
+  const gap = named ? 132 : 56;
+  const height = named ? 56 : 24;
+  const width = (dots - 1) * gap + PAD * 2 + (named ? 112 : 0);
+  const x = (i: number) => PAD + (named ? 56 : 0) + i * gap;
   return (
     <svg
-      className="path"
-      viewBox={`0 0 ${width} 24`}
+      className={named ? "path path-wide" : "path"}
+      viewBox={`0 0 ${width} ${height}`}
       width={width}
-      height={24}
+      height={height}
       role="img"
       aria-label={`${done} of ${total} stops done`}
     >
@@ -35,6 +41,12 @@ export function PathGraphic({ total, done }: Props) {
           r={R}
         />
       ))}
+      {named &&
+        named.map((label, i) => (
+          <text key={i} className="path-label" x={x(i)} y={44} textAnchor="middle">
+            {shorten(label)}
+          </text>
+        ))}
     </svg>
   );
 }

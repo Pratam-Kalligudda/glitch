@@ -67,6 +67,28 @@
 
 .route-card .path {
   margin: 0 0 var(--s-sm);
+  max-width: 220px;
+}
+
+.route-card-summary {
+  max-width: 60ch;
+}
+
+/* A single route fills the row instead of sitting in one third of it. */
+.card-grid:has(> :only-child) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.path-label {
+  fill: var(--ink-muted);
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+@media (max-width: 833px) {
+  .path-label {
+    display: none;
+  }
 }
 
 /* Progress bar */
@@ -267,6 +289,22 @@
 
 .part-head {
   margin-bottom: var(--s-lg);
+  padding: var(--s-xxl) var(--s-xl);
+  border-radius: var(--r-lg);
+  background: var(--tile-dark);
+  color: var(--on-dark);
+}
+
+.part-head .eyebrow {
+  color: var(--accent-on-dark);
+}
+
+.part-head .part-goal {
+  color: var(--on-dark-muted);
+}
+
+.part-head a:not(.pill) {
+  color: var(--accent-on-dark);
 }
 
 .part-title {
@@ -287,21 +325,6 @@
   margin-top: var(--s-md);
 }
 
-.part-head-capstone {
-  padding: var(--s-xxl) var(--s-xl);
-  border-radius: var(--r-lg);
-  background: var(--tile-dark);
-  color: var(--on-dark);
-}
-
-.part-head-capstone .eyebrow {
-  color: var(--accent-on-dark);
-}
-
-.part-head-capstone .part-goal {
-  color: var(--on-dark-muted);
-}
-
 /* Stops */
 .stop {
   padding-block: var(--s-xl);
@@ -310,7 +333,6 @@
 
 .part-head + .stop {
   border-top: 0;
-  padding-top: var(--s-xs);
 }
 
 .stop-head {

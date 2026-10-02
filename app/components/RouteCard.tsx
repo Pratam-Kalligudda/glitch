@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import type { RouteSummary } from "../../content/view";
 import { countDone } from "../state/progress";
+import { PathGraphic } from "./PathGraphic";
 import { ProgressBar } from "./ProgressBar";
 
 interface Props {
@@ -17,6 +18,7 @@ export function RouteCard({ route, done }: Props) {
   const action = count === 0 ? "Start" : count === total ? "Review" : "Resume";
   return (
     <article className="route-card reveal">
+      <PathGraphic total={total} done={count} />
       <p className="eyebrow">Route {route.number}</p>
       <h3 className="route-card-title">{route.title}</h3>
       <p className="route-card-summary">{route.summary}</p>

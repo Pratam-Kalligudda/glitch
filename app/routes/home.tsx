@@ -68,8 +68,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       </section>
 
       {routes.length > 0 && (
-        <section className="tile tile-light" id="start">
-          <div className="container container-narrow">
+        <section className="tile tile-dark tile-left" id="start">
+          <div className="container">
             <h2 className="section-title">Where to start</h2>
             <ul className="start-list" aria-label="Reading order">
               {routes.map((route) => (
