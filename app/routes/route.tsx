@@ -71,7 +71,7 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <SubNav title={route.title} done={doneIds.size} total={stops.length} nextId={next?.id ?? null}>
-        <RailDrawer parts={route.parts} doneIds={doneIds} active={active} />
+        <RailDrawer parts={route.parts} doneIds={doneIds} active={active} nextId={next?.id ?? null} />
       </SubNav>
 
       <section className="route-hero">
@@ -118,7 +118,7 @@ export default function RoutePage({ loaderData }: Route.ComponentProps) {
 
       <div className="route-body" onClick={copyCode}>
         <aside className="route-rail">
-          <Rail parts={route.parts} doneIds={doneIds} active={active} />
+          <Rail parts={route.parts} doneIds={doneIds} active={active} nextId={next?.id ?? null} />
         </aside>
         <div className="route-content">
           {route.parts.map((part) => (

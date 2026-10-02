@@ -166,7 +166,7 @@ button {
   color: var(--on-brand);
 }
 
-.tile-brand a:not(.pill) {
+.tile-brand a:not(.pill, .start-step) {
   color: var(--on-brand);
   font-weight: 700;
   text-decoration: underline;

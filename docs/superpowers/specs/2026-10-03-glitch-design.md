@@ -230,9 +230,13 @@ Format: `<path>[:<line>]: <problem>`, one per line.
 >   grid (SVG) sits behind the hero.
 > - The tear flickers for about half a second every 2.5 seconds; reduced
 >   motion keeps it still.
-> - Footer: black with the crystal grid in both themes, the torn GLITCH
->   wordmark on the left and a small terminal signing off on the right
+> - Footer: black with the crystal grid in both themes, a full-width torn GLITCH
+>   wordmark at the bottom and a small terminal signing off above it
 >   (`[breach] session still open`, `$ logout`).
+> - Rail: the next stop (the first not done) gets a red dot and a `next` tag,
+>   the same red as the Next stop button.
+> - Where to start: black step cards on the cyan band, one per route in
+>   reading order, joined by a line (across, or down on phones).
 > - Storage keys use the `glitch:` prefix (`glitch:theme`,
 >   `glitch:progress:v1`); nothing was published under the old name.
 

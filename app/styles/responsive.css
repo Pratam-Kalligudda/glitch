@@ -5,6 +5,18 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .start-steps {
+    --cols: 2;
+  }
+
+  .start-steps > li:nth-child(3n + 1)::before {
+    display: block;
+  }
+
+  .start-steps > li:nth-child(2n + 1)::before {
+    display: none;
+  }
+
   .route-hero-grid {
     grid-template-columns: minmax(0, 1fr);
     row-gap: var(--s-xl);
@@ -86,6 +98,24 @@
     flex: 1 1 100%;
   }
 
+  /* One column: the joining line runs down between the cards. */
+  .start-steps {
+    --cols: 1;
+  }
+
+  .start-steps > li + li::before,
+  .start-steps > li:nth-child(2n + 1)::before {
+    display: block;
+    top: calc(-1 * var(--s-lg));
+    left: 32px;
+    width: 4px;
+    height: var(--s-lg);
+  }
+
+  .start-steps > li:first-child::before {
+    display: none;
+  }
+
   .route-card-top,
   .route-card-bottom,
   .card-grid:has(> :only-child) .route-card > * {
@@ -138,7 +168,7 @@
     padding: var(--s-xxl) 0 var(--s-xl);
   }
 
-  .footer-inner {
+  .footer-top {
     grid-template-columns: minmax(0, 1fr);
   }
 

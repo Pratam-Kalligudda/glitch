@@ -33,8 +33,8 @@
 
   /* The glitch split on big headlines: a cyan edge left, a red edge right. Sized in em so
      it stays a fine edge at every headline size. */
-  --split: -0.017em 0 0 #3ee0ff, 0.017em 0 0 #ff2e43;
-  --split-wide: -0.033em 0 0 #3ee0ff, 0.033em 0 0 #ff2e43;
+  --split: max(-0.017em, -4px) 0 0 #3ee0ff, min(0.017em, 4px) 0 0 #ff2e43;
+  --split-wide: max(-0.033em, -7px) 0 0 #3ee0ff, min(0.033em, 7px) 0 0 #ff2e43;
 
   /* Faint crystal grid (home hero, footer), drawn as SVG like the grain. --grid suits the
      page background; --grid-on-dark suits black surfaces in either theme. */

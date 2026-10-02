@@ -88,22 +88,25 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <section className="tile tile-brand tile-left" id="start">
           <div className="container">
             <h2 className="section-title">Where to start</h2>
-            <ul className="start-list" aria-label="Reading order">
-              {routes.map((route) => (
+            {/* One black card per route in reading order, joined into a path across the band. */}
+            <ol className="start-steps" aria-label="Reading order">
+              {routes.map((route, i) => (
                 <li key={route.slug}>
-                  {route.prerequisites.length === 0 ? (
-                    <>
-                      <Link to={`/${route.slug}`}>{route.title}</Link> needs no earlier route.
-                    </>
-                  ) : (
-                    <>
-                      Read {list(route.prerequisites.map((p) => p.title))} before{" "}
-                      <Link to={`/${route.slug}`}>{route.title}</Link>.
-                    </>
-                  )}
+                  <Link className="start-step" to={`/${route.slug}`}>
+                    <span className="eyebrow">Step {String(i + 1).padStart(2, "0")}</span>
+                    <span className="start-step-title">{route.title}</span>
+                    <span className="start-step-needs">
+                      {route.prerequisites.length === 0
+                        ? "No earlier route"
+                        : `After ${list(route.prerequisites.map((p) => p.title))}`}
+                    </span>
+                    <span className="start-step-meta">
+                      {route.stops.length} stops <span aria-hidden="true">→</span>
+                    </span>
+                  </Link>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </section>
       )}

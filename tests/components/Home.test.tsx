@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it } from "vitest";
 import Home from "../../app/routes/home";
@@ -57,8 +57,12 @@ describe("Home", () => {
       }),
     ]);
     const list = screen.getByRole("list", { name: "Reading order" });
-    expect(list.textContent).toContain("Route A needs no earlier route.");
-    expect(list.textContent).toContain("Read Route A and Route B before Route C.");
+    const steps = within(list).getAllByRole("link");
+    expect(steps.map((s) => s.getAttribute("href"))).toEqual(["/a", "/b", "/c"]);
+    expect(steps[0].textContent).toContain("Step 01");
+    expect(steps[0].textContent).toContain("No earlier route");
+    expect(steps[2].textContent).toContain("Step 03");
+    expect(steps[2].textContent).toContain("After Route A and Route B");
   });
 
   it("hides the continue tile when there is no saved progress", () => {

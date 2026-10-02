@@ -511,15 +511,91 @@
 }
 
 /* Where to start, empty state */
-.start-list {
+/* Where to start: black step cards in reading order, joined by a line across the cyan. */
+/* Fixed column counts (3, 2 in responsive.css, then 1) so each row's first card is known
+   and gets no joining line. */
+.start-steps {
+  --cols: 3;
   display: grid;
-  gap: var(--s-sm);
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--s-lg);
   padding: 0;
   list-style: none;
+}
+
+.start-steps > li {
+  position: relative;
+}
+
+/* The joining line: from the previous card's right edge to this one. */
+.start-steps > li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(-1 * var(--s-lg));
+  width: var(--s-lg);
+  height: 4px;
+  background: var(--on-brand);
+}
+
+.start-steps > li:nth-child(3n + 1)::before {
+  display: none;
+}
+
+.start-step {
+  --brand-ink: var(--brand);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-xs);
+  height: 100%;
+  padding: 24px 24px 22px;
+  border: 1.6px solid var(--on-brand);
+  border-radius: var(--r-card);
+  background-color: var(--black);
+  background-image: var(--grain-dark);
+  color: var(--on-dark);
+  transition: transform 0.15s ease;
+}
+
+.start-step:hover {
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+.start-step:active {
+  transform: scale(0.98);
+}
+
+.start-step .eyebrow {
+  color: var(--brand);
+}
+
+.start-step-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 2.6vw, 40px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.start-step-needs {
+  color: var(--on-dark-muted);
   font-family: var(--font-slab);
-  font-size: clamp(20px, 2vw, 26px);
-  line-height: 1.35;
-  text-align: left;
+  font-size: 18px;
+}
+
+.start-step-meta {
+  margin-top: auto;
+  padding-top: var(--s-sm);
+  color: var(--on-dark-dim);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .start-step {
+    transition: none;
+  }
 }
 
 .empty {
@@ -531,13 +607,15 @@
 /* Footer: a black terminal floor in both themes, on the crystal grid. The torn wordmark
    on the left, the session signing off on the right. */
 .footer {
+  /* The torn wordmark's copies overhang its box; keep them inside the footer. */
+  overflow: hidden;
   padding: var(--s-section) 0 var(--s-xxl);
   background-color: var(--black);
   background-image: var(--grid-on-dark), var(--grain-dark);
   color: var(--ink);
 }
 
-.footer-inner {
+.footer-top {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
@@ -559,10 +637,11 @@
 }
 
 .footer-mark {
-  margin-top: var(--s-xs);
+  margin-top: var(--s-xl);
   font-family: var(--font-display);
-  font-size: clamp(72px, 13vw, 190px);
-  line-height: 0.88;
+  /* Sized so GLITCH spans the content width. */
+  font-size: clamp(96px, 34vw, 640px);
+  line-height: 0.82;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
@@ -820,6 +899,32 @@
 .rail-stop.is-done::before {
   border-color: var(--success);
   background: var(--success);
+}
+
+/* The next stop: the rail's one action, in the same red as the Next stop button. */
+.rail-stop.is-next {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.rail-stop.is-next::before {
+  border-color: var(--action);
+  background: var(--action);
+  outline: 3px solid color-mix(in srgb, var(--action) 30%, transparent);
+}
+
+.rail-next {
+  margin-left: 8px;
+  padding: 1px 6px;
+  border-radius: var(--r-chip);
+  background: var(--action);
+  color: var(--on-action);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 1px;
 }
 
 .is-capstone .rail-stops {

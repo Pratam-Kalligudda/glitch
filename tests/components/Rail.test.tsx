@@ -57,6 +57,19 @@ describe("Rail", () => {
     expect(open.querySelector(".sr-only")).toBeNull();
   });
 
+  it("marks the next stop, and only that one", () => {
+    render(<Rail parts={parts} doneIds={new Set(["init"])} active={null} nextId="commit" />);
+    const next = partLink(/Title commit/);
+    expect(next.className).toContain("is-next");
+    expect(next.querySelector(".rail-next")?.textContent).toBe("next");
+    expect(document.querySelectorAll(".is-next")).toHaveLength(1);
+  });
+
+  it("marks no stop as next when every stop is done", () => {
+    render(<Rail parts={parts} doneIds={new Set()} active={null} nextId={null} />);
+    expect(document.querySelectorAll(".is-next")).toHaveLength(0);
+  });
+
   it("marks the active part", () => {
     render(<Rail parts={parts} doneIds={new Set()} active="share" />);
     expect(partLink(/Work locally/).getAttribute("aria-current")).toBeNull();

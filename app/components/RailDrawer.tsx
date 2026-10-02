@@ -7,10 +7,11 @@ interface Props {
   parts: PartView[];
   doneIds: ReadonlySet<string>;
   active: string | null;
+  nextId?: string | null;
 }
 
 /** The rail as a slide-in drawer for narrow screens. */
-export function RailDrawer({ parts, doneIds, active }: Props) {
+export function RailDrawer({ parts, doneIds, active, nextId = null }: Props) {
   const [open, setOpen] = useState(false);
   // The dialog's scroll lock swallows the anchor jump, so scroll once it has closed.
   const navigated = useRef(false);
@@ -35,6 +36,7 @@ export function RailDrawer({ parts, doneIds, active }: Props) {
             parts={parts}
             doneIds={doneIds}
             active={active}
+            nextId={nextId}
             onNavigate={() => {
               navigated.current = true;
               setOpen(false);
