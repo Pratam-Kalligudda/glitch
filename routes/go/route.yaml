@@ -1,0 +1,7 @@
+title: Go, in depth
+number: 1
+summary: "The Go language beyond the basics: types, interfaces, errors, generics, iterators, concurrency, the standard library, testing and performance. Capstone: a concurrent link checker you ship as a single binary."
+hero: Past hello world. Into how Go really works.
+lede: You have written some Go. This route takes you through every part of the language and its standard library, one idea per stop, then you build and ship a real concurrent tool with all of it.
+prerequisites: []
+checked: 2026-10
