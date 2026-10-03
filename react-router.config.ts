@@ -8,6 +8,13 @@ export default {
   basename: process.env.BASE_PATH ?? "/",
   async prerender() {
     const { routes } = loadSite(routesDir);
-    return ["/", ...routes.map((route) => `/${route.slug}`)];
+    // The route overview, then one page per part.
+    return [
+      "/",
+      ...routes.flatMap((route) => [
+        `/${route.slug}`,
+        ...route.parts.map((part) => `/${route.slug}/${part.id}`),
+      ]),
+    ];
   },
 } satisfies Config;

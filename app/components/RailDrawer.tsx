@@ -1,17 +1,18 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRef, useState } from "react";
-import type { PartView } from "../../content/view";
+import type { PartOutline } from "../../content/view";
 import { Rail } from "./Rail";
 
 interface Props {
-  parts: PartView[];
+  slug: string;
+  parts: PartOutline[];
+  current: string;
   doneIds: ReadonlySet<string>;
-  active: string | null;
-  nextId?: string | null;
+  nextId: string | null;
 }
 
 /** The rail as a slide-in drawer for narrow screens. */
-export function RailDrawer({ parts, doneIds, active, nextId = null }: Props) {
+export function RailDrawer({ slug, parts, current, doneIds, nextId }: Props) {
   const [open, setOpen] = useState(false);
   // The dialog's scroll lock swallows the anchor jump, so scroll once it has closed.
   const navigated = useRef(false);
@@ -33,9 +34,10 @@ export function RailDrawer({ parts, doneIds, active, nextId = null }: Props) {
         <Dialog.Content className="drawer" aria-describedby={undefined} onCloseAutoFocus={scrollToHash}>
           <Dialog.Title className="drawer-title">Parts</Dialog.Title>
           <Rail
+            slug={slug}
             parts={parts}
+            current={current}
             doneIds={doneIds}
-            active={active}
             nextId={nextId}
             onNavigate={() => {
               navigated.current = true;

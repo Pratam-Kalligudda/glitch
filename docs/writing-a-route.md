@@ -138,6 +138,8 @@ routes/<route-slug>/
 - The folder name is the slug: lowercase letters, digits and single hyphens.
 - Numeric prefixes set the order and are not part of the id. The stop id is the file name
   without prefix and `.md`: `03-closures.md` has the id `closures`.
+- Each part is its own page, `/<route-slug>/<part-id>`; the route's own page is an
+  overview of its parts. Keep part ids short and stable: they are URLs.
 - A stop id is the page anchor and the key under which progress is saved. Choose it once;
   renaming the file later loses readers' progress for that stop.
 - In a capstone, a stop whose id starts with `step-` is a step and must have `done_when`.

@@ -212,6 +212,15 @@ Format: `<path>[:<line>]: <problem>`, one per line.
 
 ## 5. Visual design
 
+> **Revision, 2026-10-03 (one page per part).** The first in-depth route (Go, 121
+> stops) made the single route page 16.7 MB with 164,000 DOM nodes and a 52 s load.
+> A route is now an overview page (`/<slug>`: hero, stats, one card per part with its
+> progress) plus one prerendered page per part (`/<slug>/<part>`: the part's stops, the
+> rail for the whole route, previous and next part). References link by anchor on the
+> same part page and to `<base><slug>/<part>/#<stop>` otherwise. Progress keys are
+> unchanged. The dev server no longer watches `build/`, so a running dev server cannot
+> lock the folders the build's flatten step renames on Windows.
+
 > **Revision, 2026-10-03 (Glitch rebrand).** At the owner's request the site
 > is renamed **Glitch**, after the "glitch in the Matrix". The Knockout
 > structure below stays; these points supersede it where they conflict:

@@ -37,6 +37,7 @@ routes/<route-slug>/
 ```
 
 - The folder name is the route slug: lowercase letters, digits and single hyphens. `assets` and `route-assets` are reserved, and a slug must not equal the repository name (the base path folder). Numeric prefixes set order and are not part of an id.
+- Each route has an overview page at `/<route-slug>` and one page per part at `/<route-slug>/<part-id>`, where the part id is the part folder name without its prefix. Renaming a part folder changes that page's URL.
 - A stop id is the filename without prefix and extension. It is the page anchor and the progress key, so renaming a stop file loses readers' saved progress for it. Ids are unique within a route.
 - `route.yaml`: `title`, `number` (unique), `summary` are required. Optional: `hero`, `lede`, `prerequisites` (route slugs, each with a lower `number`), `checked` (`YYYY-MM`), `draft` (`true` hides the route). Quote any value that contains `: `.
 - `part.md` front matter: `title`, `goal`, and `kind: capstone` for a capstone. The body is an optional intro.

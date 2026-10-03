@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router";
-import type { RouteSummary } from "../../content/view";
+import { stopPath, type RouteSummary } from "../../content/view";
 import { countDone, nextStop, useProgress } from "../state/progress";
 import { PathGraphic } from "./PathGraphic";
 
@@ -28,7 +28,7 @@ export function ContinueTile({ routes }: { routes: RouteSummary[] }) {
       <h2 className="tile-title">{route.title}</h2>
       <p className="tile-lead">{next ? `Next stop: ${next.title}` : "Every stop is done."}</p>
       <div className="actions">
-        <Link className="pill" to={next ? `/${route.slug}#${next.id}` : `/${route.slug}`}>
+        <Link className="pill" to={next ? stopPath(route.slug, next.part, next.id) : `/${route.slug}`}>
           {next ? "Resume" : "Review"}
         </Link>
       </div>

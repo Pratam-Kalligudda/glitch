@@ -644,6 +644,7 @@
 }
 
 .subnav-title {
+  color: var(--ink);
   overflow: hidden;
   font-family: var(--font-display);
   font-size: 26px;
@@ -652,6 +653,11 @@
   text-transform: uppercase;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.subnav-title:hover {
+  color: var(--brand-ink);
+  text-decoration: none;
 }
 
 .subnav-right {
@@ -897,6 +903,161 @@
 
 .is-capstone .rail-stops {
   border-left-color: var(--brand-ink);
+}
+
+/* Route overview: one card per part, each leading to that part's page. */
+.route-parts {
+  padding: var(--s-section) var(--gutter);
+}
+
+.route-parts > .container {
+  width: 100%;
+  max-width: var(--page-max);
+}
+
+.part-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: var(--s-lg);
+  padding: 0;
+  list-style: none;
+}
+
+.part-card-link {
+  --brand-ink: var(--brand);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-xs);
+  height: 100%;
+  padding: 28px;
+  border: var(--line);
+  border-radius: var(--r-card);
+  background-color: var(--black);
+  background-image: var(--grain-dark);
+  color: var(--on-dark);
+  transition: transform 0.15s ease;
+}
+
+.part-card-link:hover {
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+.part-card-link:active {
+  transform: scale(0.98);
+}
+
+.part-card-link .eyebrow {
+  color: var(--brand);
+}
+
+.part-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.4vw, 38px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.part-card-goal {
+  color: var(--on-dark-muted);
+  font-family: var(--font-slab);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.part-card-link .progress {
+  margin-top: auto;
+  background: var(--line-on-dark);
+}
+
+.part-card-meta {
+  color: var(--on-dark-dim);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* The capstone card is the one cyan block on the overview. */
+.is-capstone .part-card-link {
+  background-color: var(--brand);
+  background-image: var(--grain-light);
+  color: var(--on-brand);
+}
+
+.is-capstone .part-card-link .eyebrow,
+.is-capstone .part-card-goal,
+.is-capstone .part-card-meta {
+  color: var(--on-brand);
+}
+
+.is-capstone .part-card-link .progress {
+  background: color-mix(in srgb, var(--on-brand) 25%, transparent);
+}
+
+.is-capstone .part-card-link .progress-fill {
+  background: var(--on-brand);
+}
+
+.is-complete .part-card-link {
+  border-color: var(--success);
+}
+
+.is-complete .part-card-meta::after {
+  content: " ✓";
+  color: var(--success);
+}
+
+/* Bottom of a part page: back to the previous part, on to the next. */
+.part-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-lg);
+  margin-top: var(--s-section);
+}
+
+.part-pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-xs);
+  padding: 24px 28px;
+  border: var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  color: var(--ink);
+  transition: transform 0.15s ease;
+}
+
+.part-pager-link:hover {
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+.part-pager-link .eyebrow {
+  color: var(--brand-ink);
+}
+
+.part-pager-link.is-next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.part-pager-link.is-next .part-pager-title::after {
+  content: " →";
+}
+
+.part-pager-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .part-card-link,
+  .part-pager-link {
+    transition: none;
+  }
 }
 
 /* Parts: every header is a black card; the capstone is crystal cyan. */

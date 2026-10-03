@@ -95,6 +95,14 @@
     gap: var(--s-lg);
   }
 
+  .route-parts {
+    padding-block: var(--s-xxl);
+  }
+
+  .part-pager {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .route-card-top,
   .route-card-bottom,
   .card-grid:has(> :only-child) .route-card > * {

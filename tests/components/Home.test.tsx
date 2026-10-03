@@ -3,9 +3,13 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it } from "vitest";
 import Home from "../../app/routes/home";
+import { useProgress } from "../../app/state/progress";
 import type { RouteSummary } from "../../content/view";
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  useProgress.setState({ lastRoute: null, done: {} });
+});
 
 const summary = (over: Partial<RouteSummary>): RouteSummary => ({
   slug: "a",
@@ -13,7 +17,7 @@ const summary = (over: Partial<RouteSummary>): RouteSummary => ({
   number: 1,
   summary: "About A.",
   partCount: 1,
-  stops: [{ id: "s", title: "S" }],
+  stops: [{ id: "s", title: "S", part: "p" }],
   prerequisites: [],
   ...over,
 });
@@ -68,6 +72,20 @@ describe("Home", () => {
     show([summary({})]);
     const how = screen.getByRole("list", { name: "How it works" });
     expect(within(how).getAllByRole("listitem")).toHaveLength(4);
+  });
+
+  it("resumes at the next stop on its part page", () => {
+    useProgress.setState({ lastRoute: "a", done: { a: ["s"] } });
+    show([
+      summary({
+        stops: [
+          { id: "s", title: "S", part: "p" },
+          { id: "t", title: "T", part: "q" },
+        ],
+      }),
+    ]);
+    const tile = screen.getByRole("region", { name: "Continue" });
+    expect(within(tile).getByRole("link", { name: "Resume" }).getAttribute("href")).toBe("/a/q#t");
   });
 
   it("hides the continue tile when there is no saved progress", () => {

@@ -12,7 +12,7 @@ const route = (n: number, stops: number): RouteSummary => ({
   number: n,
   summary: "",
   partCount: 1,
-  stops: Array.from({ length: stops }, (_, i) => ({ id: `s${i}`, title: `Stop ${i}` })),
+  stops: Array.from({ length: stops }, (_, i) => ({ id: `s${i}`, title: `Stop ${i}`, part: "p" })),
   prerequisites: [],
 });
 

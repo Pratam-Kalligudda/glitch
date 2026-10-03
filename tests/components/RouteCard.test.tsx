@@ -14,9 +14,9 @@ const route: RouteSummary = {
   summary: "Track changes.",
   partCount: 3,
   stops: [
-    { id: "init", title: "Create a repository" },
-    { id: "commit", title: "Stage and commit" },
-    { id: "history", title: "Read history" },
+    { id: "init", title: "Create a repository", part: "local" },
+    { id: "commit", title: "Stage and commit", part: "local" },
+    { id: "history", title: "Read history", part: "local" },
   ],
   prerequisites: [],
 };
