@@ -24,7 +24,7 @@ function contentReload(): Plugin {
 export default defineConfig({
   base: process.env.BASE_PATH ?? "/",
   plugins: [reactRouter(), contentReload()],
-  // On Windows a watched folder cannot be renamed, so a running dev server would make the
-  // build's flatten step fail on build/client/<base>/<route>/. Build output is never source.
+  // Build output is never source. (A dev server can still hold build folders open on
+  // Windows; content/flatten-build.ts copies when a rename is refused.)
   server: { watch: { ignored: ["**/build/**"] } },
 });

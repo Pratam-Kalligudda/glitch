@@ -3,6 +3,26 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 /**
+ * Moves a file or folder. Windows refuses to rename a folder that another process is
+ * watching (a running dev server, antivirus), though its contents can still be read; then
+ * copy it and remove the original instead.
+ */
+export function moveEntry(
+  from: string,
+  to: string,
+  rename: (from: string, to: string) => void = fs.renameSync,
+): void {
+  try {
+    rename(from, to);
+  } catch (error) {
+    const code = (error as NodeJS.ErrnoException).code;
+    if (code !== "EPERM" && code !== "EBUSY" && code !== "EACCES") throw error;
+    fs.cpSync(from, to, { recursive: true });
+    fs.rmSync(from, { recursive: true, force: true });
+  }
+}
+
+/**
  * React Router prerenders pages under `<clientDir>/<basePath>/`, while hashed assets
  * stay in `<clientDir>/assets/`. GitHub Pages serves the artifact root at the base
  * path, so the pages move up to the root, replacing the SPA shell left there.
@@ -27,10 +47,10 @@ export function flattenBuild(clientDir: string, basePath: string): void {
         "Rename the route folder so it does not match a build output name or the base path.",
     );
   }
-  if (fs.existsSync(shell) && !fs.existsSync(fallback)) fs.renameSync(shell, fallback);
+  if (fs.existsSync(shell) && !fs.existsSync(fallback)) moveEntry(shell, fallback);
   for (const entry of entries) {
     fs.rmSync(path.join(clientDir, entry), { recursive: true, force: true });
-    fs.renameSync(path.join(nested, entry), path.join(clientDir, entry));
+    moveEntry(path.join(nested, entry), path.join(clientDir, entry));
   }
   fs.rmSync(path.join(clientDir, segments[0]), { recursive: true, force: true });
 }

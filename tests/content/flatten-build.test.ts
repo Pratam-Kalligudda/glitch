@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { flattenBuild } from "../../content/flatten-build";
+import { flattenBuild, moveEntry } from "../../content/flatten-build";
 
 function tree(files: Record<string, string>): string {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "glitch-build-"));
@@ -66,5 +66,28 @@ describe("flattenBuild", () => {
     flattenBuild(dir, "/");
     flattenBuild(dir, "/sub/");
     expect(read(dir, "index.html")).toBe("home");
+  });
+});
+
+describe("moveEntry", () => {
+  it("copies, then removes, when the rename is refused", () => {
+    // On Windows a folder that another process watches (a dev server, antivirus) cannot
+    // be renamed, but its contents can still be copied.
+    const dir = tree({ "from/page/index.html": "route", "from/page/x/y.data": "data" });
+    const refuse = () => {
+      throw Object.assign(new Error("EPERM: operation not permitted, rename"), { code: "EPERM" });
+    };
+    moveEntry(path.join(dir, "from/page"), path.join(dir, "page"), refuse);
+    expect(read(dir, "page/index.html")).toBe("route");
+    expect(read(dir, "page/x/y.data")).toBe("data");
+    expect(fs.existsSync(path.join(dir, "from/page"))).toBe(false);
+  });
+
+  it("does not hide other errors", () => {
+    const dir = tree({ "from/a.txt": "a" });
+    const fail = () => {
+      throw Object.assign(new Error("ENOSPC"), { code: "ENOSPC" });
+    };
+    expect(() => moveEntry(path.join(dir, "from/a.txt"), path.join(dir, "a.txt"), fail)).toThrow(/ENOSPC/);
   });
 });
